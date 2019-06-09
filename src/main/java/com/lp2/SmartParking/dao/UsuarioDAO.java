@@ -13,5 +13,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Valentina
  */
 public interface UsuarioDAO extends CrudRepository<Usuario, Integer> {
-    
+   
 }

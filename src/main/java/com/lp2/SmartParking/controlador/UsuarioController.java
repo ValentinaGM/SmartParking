@@ -7,6 +7,7 @@ package com.lp2.SmartParking.controlador;
 
 import com.lp2.SmartParking.dao.UsuarioDAO;
 import com.lp2.SmartParking.modelo.Usuario;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,19 +22,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class UsuarioController {
+    
     @Autowired
     private UsuarioDAO uDAO;
     
-    @GetMapping("/inscripcion")
-    public String inscripcion(Model model) {
-        model.addAttribute("usuario", new Usuario());
-        return "inscripcion";
+    @GetMapping("/Login")
+    public String usuarios(Model model) {
+        
+        List<Usuario> usuarios = (List<Usuario>) uDAO.findAll();
+        model.addAttribute("usuario", usuarios);
+        return "login";
     }
-    @PostMapping("/inscribeEquipo")
+    @PostMapping("/inscribeUsuario")
     public String inscribirForm(@ModelAttribute Usuario usuario){
         System.out.println(usuario.getId()); 
         uDAO.save(usuario);
-        return "index";
+        return "login";
         
     }
 }
