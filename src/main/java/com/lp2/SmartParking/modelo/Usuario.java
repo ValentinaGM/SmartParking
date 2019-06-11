@@ -6,7 +6,7 @@
 package com.lp2.SmartParking.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -54,7 +54,7 @@ public class Usuario implements Serializable {
     @Column(name = "contrase\u00f1a")
     private String contraseña;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.LAZY)
-    private Collection<Vehiculo> vehiculoCollection;
+    private List<Vehiculo> vehiculoList;
 
     public Usuario() {
     }
@@ -108,12 +108,12 @@ public class Usuario implements Serializable {
         this.contraseña = contraseña;
     }
 
-    public Collection<Vehiculo> getVehiculoCollection() {
-        return vehiculoCollection;
+    public List<Vehiculo> getVehiculoList() {
+        return vehiculoList;
     }
 
-    public void setVehiculoCollection(Collection<Vehiculo> vehiculoCollection) {
-        this.vehiculoCollection = vehiculoCollection;
+    public void setVehiculoList(List<Vehiculo> vehiculoList) {
+        this.vehiculoList = vehiculoList;
     }
 
     @Override

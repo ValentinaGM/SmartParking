@@ -6,8 +6,8 @@
 package com.lp2.SmartParking.modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,8 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,11 +48,8 @@ public class Ticket implements Serializable {
     @Column(name = "tiempo estacionado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date tiempoEstacionado;
-    @JoinColumn(name = "Estacionamientoid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Estacionamiento estacionamientoid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticketid", fetch = FetchType.LAZY)
-    private Collection<Vehiculo> vehiculoCollection;
+    private List<Vehiculo> vehiculoList;
 
     public Ticket() {
     }
@@ -95,20 +90,12 @@ public class Ticket implements Serializable {
         this.tiempoEstacionado = tiempoEstacionado;
     }
 
-    public Estacionamiento getEstacionamientoid() {
-        return estacionamientoid;
+    public List<Vehiculo> getVehiculoList() {
+        return vehiculoList;
     }
 
-    public void setEstacionamientoid(Estacionamiento estacionamientoid) {
-        this.estacionamientoid = estacionamientoid;
-    }
-
-    public Collection<Vehiculo> getVehiculoCollection() {
-        return vehiculoCollection;
-    }
-
-    public void setVehiculoCollection(Collection<Vehiculo> vehiculoCollection) {
-        this.vehiculoCollection = vehiculoCollection;
+    public void setVehiculoList(List<Vehiculo> vehiculoList) {
+        this.vehiculoList = vehiculoList;
     }
 
     @Override

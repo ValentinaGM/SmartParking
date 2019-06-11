@@ -48,15 +48,15 @@ public class Vehiculo implements Serializable {
     @Size(max = 20)
     @Column(name = "modelo")
     private String modelo;
-    @JoinColumn(name = "Ticketid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Ticket ticketid;
     @JoinColumn(name = "Puestoid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Puesto puestoid;
     @JoinColumn(name = "Usuarioid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuarioid;
+    @JoinColumn(name = "Ticketid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Ticket ticketid;
 
     public Vehiculo() {
     }
@@ -102,14 +102,6 @@ public class Vehiculo implements Serializable {
         this.modelo = modelo;
     }
 
-    public Ticket getTicketid() {
-        return ticketid;
-    }
-
-    public void setTicketid(Ticket ticketid) {
-        this.ticketid = ticketid;
-    }
-
     public Puesto getPuestoid() {
         return puestoid;
     }
@@ -124,6 +116,14 @@ public class Vehiculo implements Serializable {
 
     public void setUsuarioid(Usuario usuarioid) {
         this.usuarioid = usuarioid;
+    }
+
+    public Ticket getTicketid() {
+        return ticketid;
+    }
+
+    public void setTicketid(Ticket ticketid) {
+        this.ticketid = ticketid;
     }
 
     @Override
