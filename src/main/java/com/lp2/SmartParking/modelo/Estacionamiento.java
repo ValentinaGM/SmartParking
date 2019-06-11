@@ -6,7 +6,7 @@
 package com.lp2.SmartParking.modelo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +28,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "estacionamiento")
 @NamedQueries({
-    @NamedQuery(name = "Estacionamiento.findAll", query = "SELECT e FROM Estacionamiento e")})
+    @NamedQuery(name = "Estacionamiento.findAll", query = "SELECT e FROM Estacionamiento e")
+    , @NamedQuery(name = "Estacionamiento.findById", query = "SELECT e FROM Estacionamiento e WHERE e.id = :id")
+    , @NamedQuery(name = "Estacionamiento.findByCantidad", query = "SELECT e FROM Estacionamiento e WHERE e.cantidad = :cantidad")
+    , @NamedQuery(name = "Estacionamiento.findByUbicacion", query = "SELECT e FROM Estacionamiento e WHERE e.ubicacion = :ubicacion")})
 public class Estacionamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,11 +46,11 @@ public class Estacionamiento implements Serializable {
     @Column(name = "ubicacion")
     private String ubicacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estacionamientoid", fetch = FetchType.LAZY)
-    private List<Puesto> puestoList;
+    private Collection<Puesto> puestoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estacionamientoid", fetch = FetchType.LAZY)
-    private List<Sistema> sistemaList;
+    private Collection<Ticket> ticketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estacionamientoid", fetch = FetchType.LAZY)
-    private List<Guardia> guardiaList;
+    private Collection<Guardia> guardiaCollection;
 
     public Estacionamiento() {
     }
@@ -80,28 +83,28 @@ public class Estacionamiento implements Serializable {
         this.ubicacion = ubicacion;
     }
 
-    public List<Puesto> getPuestoList() {
-        return puestoList;
+    public Collection<Puesto> getPuestoCollection() {
+        return puestoCollection;
     }
 
-    public void setPuestoList(List<Puesto> puestoList) {
-        this.puestoList = puestoList;
+    public void setPuestoCollection(Collection<Puesto> puestoCollection) {
+        this.puestoCollection = puestoCollection;
     }
 
-    public List<Sistema> getSistemaList() {
-        return sistemaList;
+    public Collection<Ticket> getTicketCollection() {
+        return ticketCollection;
     }
 
-    public void setSistemaList(List<Sistema> sistemaList) {
-        this.sistemaList = sistemaList;
+    public void setTicketCollection(Collection<Ticket> ticketCollection) {
+        this.ticketCollection = ticketCollection;
     }
 
-    public List<Guardia> getGuardiaList() {
-        return guardiaList;
+    public Collection<Guardia> getGuardiaCollection() {
+        return guardiaCollection;
     }
 
-    public void setGuardiaList(List<Guardia> guardiaList) {
-        this.guardiaList = guardiaList;
+    public void setGuardiaCollection(Collection<Guardia> guardiaCollection) {
+        this.guardiaCollection = guardiaCollection;
     }
 
     @Override

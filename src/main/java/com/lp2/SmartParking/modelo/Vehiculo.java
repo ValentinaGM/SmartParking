@@ -28,7 +28,12 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "vehiculo")
 @NamedQueries({
-    @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v")})
+    @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v")
+    , @NamedQuery(name = "Vehiculo.findById", query = "SELECT v FROM Vehiculo v WHERE v.id = :id")
+    , @NamedQuery(name = "Vehiculo.findByPatente", query = "SELECT v FROM Vehiculo v WHERE v.patente = :patente")
+    , @NamedQuery(name = "Vehiculo.findByMarca", query = "SELECT v FROM Vehiculo v WHERE v.marca = :marca")
+    , @NamedQuery(name = "Vehiculo.findByModelo", query = "SELECT v FROM Vehiculo v WHERE v.modelo = :modelo")
+    , @NamedQuery(name = "Vehiculo.findByUsuariorut", query = "SELECT v FROM Vehiculo v WHERE v.usuariorut = :usuariorut")})
 public class Vehiculo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +58,9 @@ public class Vehiculo implements Serializable {
     @Size(min = 1, max = 12)
     @Column(name = "Usuariorut")
     private String usuariorut;
+    @JoinColumn(name = "Ticketid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Ticket ticketid;
     @JoinColumn(name = "Puestoid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Puesto puestoid;
@@ -111,6 +119,14 @@ public class Vehiculo implements Serializable {
 
     public void setUsuariorut(String usuariorut) {
         this.usuariorut = usuariorut;
+    }
+
+    public Ticket getTicketid() {
+        return ticketid;
+    }
+
+    public void setTicketid(Ticket ticketid) {
+        this.ticketid = ticketid;
     }
 
     public Puesto getPuestoid() {

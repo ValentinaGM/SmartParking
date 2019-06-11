@@ -6,7 +6,7 @@
 package com.lp2.SmartParking.modelo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,7 +29,13 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "usuario")
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    , @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")
+    , @NamedQuery(name = "Usuario.findByRut", query = "SELECT u FROM Usuario u WHERE u.rut = :rut")
+    , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")
+    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
+    , @NamedQuery(name = "Usuario.findByContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.contrase\u00f1a = :contrase\u00f1a")
+    , @NamedQuery(name = "Usuario.findByTicketid", query = "SELECT u FROM Usuario u WHERE u.ticketid = :ticketid")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,11 +59,12 @@ public class Usuario implements Serializable {
     @Size(max = 50)
     @Column(name = "contrase\u00f1a")
     private String contraseña;
-    @JoinColumn(name = "Sistemaid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Sistema sistemaid;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Ticketid")
+    private int ticketid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.LAZY)
-    private List<Vehiculo> vehiculoList;
+    private Collection<Vehiculo> vehiculoCollection;
 
     public Usuario() {
     }
@@ -68,9 +73,10 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(Integer id, String rut) {
+    public Usuario(Integer id, String rut, int ticketid) {
         this.id = id;
         this.rut = rut;
+        this.ticketid = ticketid;
     }
 
     public Integer getId() {
@@ -113,20 +119,20 @@ public class Usuario implements Serializable {
         this.contraseña = contraseña;
     }
 
-    public Sistema getSistemaid() {
-        return sistemaid;
+    public int getTicketid() {
+        return ticketid;
     }
 
-    public void setSistemaid(Sistema sistemaid) {
-        this.sistemaid = sistemaid;
+    public void setTicketid(int ticketid) {
+        this.ticketid = ticketid;
     }
 
-    public List<Vehiculo> getVehiculoList() {
-        return vehiculoList;
+    public Collection<Vehiculo> getVehiculoCollection() {
+        return vehiculoCollection;
     }
 
-    public void setVehiculoList(List<Vehiculo> vehiculoList) {
-        this.vehiculoList = vehiculoList;
+    public void setVehiculoCollection(Collection<Vehiculo> vehiculoCollection) {
+        this.vehiculoCollection = vehiculoCollection;
     }
 
     @Override

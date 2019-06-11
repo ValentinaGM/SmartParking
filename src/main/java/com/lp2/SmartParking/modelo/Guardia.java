@@ -6,7 +6,7 @@
 package com.lp2.SmartParking.modelo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +31,12 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "guardia")
 @NamedQueries({
-    @NamedQuery(name = "Guardia.findAll", query = "SELECT g FROM Guardia g")})
+    @NamedQuery(name = "Guardia.findAll", query = "SELECT g FROM Guardia g")
+    , @NamedQuery(name = "Guardia.findById", query = "SELECT g FROM Guardia g WHERE g.id = :id")
+    , @NamedQuery(name = "Guardia.findByRut", query = "SELECT g FROM Guardia g WHERE g.rut = :rut")
+    , @NamedQuery(name = "Guardia.findByNombre", query = "SELECT g FROM Guardia g WHERE g.nombre = :nombre")
+    , @NamedQuery(name = "Guardia.findByTelefono", query = "SELECT g FROM Guardia g WHERE g.telefono = :telefono")
+    , @NamedQuery(name = "Guardia.findByEmail", query = "SELECT g FROM Guardia g WHERE g.email = :email")})
 public class Guardia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,7 +63,7 @@ public class Guardia implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estacionamiento estacionamientoid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "guardiaid", fetch = FetchType.LAZY)
-    private List<Turnos> turnosList;
+    private Collection<Turnos> turnosCollection;
 
     public Guardia() {
     }
@@ -120,12 +125,12 @@ public class Guardia implements Serializable {
         this.estacionamientoid = estacionamientoid;
     }
 
-    public List<Turnos> getTurnosList() {
-        return turnosList;
+    public Collection<Turnos> getTurnosCollection() {
+        return turnosCollection;
     }
 
-    public void setTurnosList(List<Turnos> turnosList) {
-        this.turnosList = turnosList;
+    public void setTurnosCollection(Collection<Turnos> turnosCollection) {
+        this.turnosCollection = turnosCollection;
     }
 
     @Override

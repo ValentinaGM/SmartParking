@@ -5,8 +5,8 @@
  */
 package com.lp2.SmartParking.controlador;
 
-import com.lp2.SmartParking.dao.UsuarioDAO;
-import com.lp2.SmartParking.modelo.Usuario;
+import com.lp2.SmartParking.dao.GuardiaDAO;
+import com.lp2.SmartParking.modelo.Guardia;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,27 +20,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author Valentina
  */
-
 @Controller
-public class UsuarioController {
+public class GuardiaController {
     
-    @Autowired
-    private UsuarioDAO uDAO;
+     @Autowired
+    private GuardiaDAO gDAO;
     
-    @GetMapping("/login")
-    public String usuarios(Model model) {
+    @GetMapping("/")
+    public String guardias(Model model) {
         
-        List<Usuario> usuarios = uDAO.findAll();
-        model.addAttribute("usuario", usuarios);
-        return "login"; 
+        List<Guardia> guardias = (List<Guardia>) gDAO.findAll();
+        model.addAttribute("guardia", guardias);
+        return "login";
+    }
+    @PostMapping("/inscribeUsuario")
+    public String inscribirForm(@ModelAttribute Guardia guardia){
+        System.out.println(guardia.getId()); 
+        gDAO.save(guardia);
+        return "login";
+   
     }
     
-    /*
-    @PostMapping("/inscribeUsuario")
-    public String inscribirForm(@ModelAttribute Usuario usuario){
-        System.out.println(usuario.getId()); 
-        uDAO.save(usuario);
-        return "login";
-        
-    }*/
 }

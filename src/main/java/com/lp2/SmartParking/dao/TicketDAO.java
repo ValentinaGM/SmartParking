@@ -5,17 +5,13 @@
  */
 package com.lp2.SmartParking.dao;
 
-import com.lp2.SmartParking.modelo.Usuario;
-import java.util.List;
+import com.lp2.SmartParking.modelo.Ticket;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  *
  * @author Valentina
  */
-public interface UsuarioDAO extends CrudRepository<Usuario, Integer> {
-     @Override
-    public List<Usuario> findAll(); 
+public interface TicketDAO extends CrudRepository<Ticket, Integer> {
     
 }
