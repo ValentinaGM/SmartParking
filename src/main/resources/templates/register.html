@@ -1,37 +1,46 @@
 <!DOCTYPE html>
-<html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartParking</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-    <link rel="stylesheet" href="assets/css/Header-Blue.css">
-    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
-    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="../static/css/Header-Blue.css">
+    <link rel="stylesheet" href="../static/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="../static/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 
 <body>
-    <div class="register-photo" style="background-color:rgb(24,78,142);">
-        <div class="form-container">
-            <div class="image-holder" style="background-image:url(&quot;assets/img/parkingLot.jpg&quot;);"></div>
+    <div class="portada">
+        <div class="col-md-4 offset-md-4">            
             <form method="post">
-                <h2 class="text-center"><strong>Crea una cuenta.</strong></h2>
-                <div class="form-group"><input class="form-control" type="text" placeholder="Rut"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Contraseña"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password-repeat" placeholder="Contraseña (repita)"></div>
-                <div class="form-group">
-                    <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="checkbox">Confirmo que la información anterior es real.</label></div>
+                <h2 class="text-center text-white"><strong>Crea una cuenta</strong></h2>
+                <div class="col-md-10 offset-md-1">
+                    <div class="form-group"><input class="form-control" type="text" placeholder="Rut"></div>
+                    <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Contraseña"></div>
+                    <div class="form-group"><input class="form-control" type="password" name="password-repeat" placeholder="Contraseña (repita)"></div>
+                    <div class="form-group">
+                        <div class="form-check text-white"><label class="form-check-label"><input class="form-check-input" type="checkbox">Confirmo que la información anterior es real.</label></div>
+                    </div>
                 </div>
-                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Registrar</button></div>
+                <div class="form-group col-md-4 offset-md-4"><button class="btn btn-primary btn-block" type="submit">Registrar</button></div>
+                
             </form>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

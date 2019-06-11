@@ -29,13 +29,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "usuario")
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")
-    , @NamedQuery(name = "Usuario.findByRut", query = "SELECT u FROM Usuario u WHERE u.rut = :rut")
-    , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")
-    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
-    , @NamedQuery(name = "Usuario.findByContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.contrase\u00f1a = :contrase\u00f1a")
-    , @NamedQuery(name = "Usuario.findByTicketid", query = "SELECT u FROM Usuario u WHERE u.ticketid = :ticketid")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,10 +53,6 @@ public class Usuario implements Serializable {
     @Size(max = 50)
     @Column(name = "contrase\u00f1a")
     private String contraseña;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Ticketid")
-    private int ticketid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.LAZY)
     private Collection<Vehiculo> vehiculoCollection;
 
@@ -73,10 +63,9 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(Integer id, String rut, int ticketid) {
+    public Usuario(Integer id, String rut) {
         this.id = id;
         this.rut = rut;
-        this.ticketid = ticketid;
     }
 
     public Integer getId() {
@@ -117,14 +106,6 @@ public class Usuario implements Serializable {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
-    }
-
-    public int getTicketid() {
-        return ticketid;
-    }
-
-    public void setTicketid(int ticketid) {
-        this.ticketid = ticketid;
     }
 
     public Collection<Vehiculo> getVehiculoCollection() {

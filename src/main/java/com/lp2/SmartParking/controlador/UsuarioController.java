@@ -38,7 +38,7 @@ public class UsuarioController {
     /*
     @PostMapping("/inscribeUsuario")
     public String inscribirForm(@ModelAttribute Usuario usuario){
-        System.out.println(usuario.getId()); 
+        System.out.println(usuario.getNombre()); 
         uDAO.save(usuario);
         return "login";
         

@@ -29,8 +29,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "puesto")
 @NamedQueries({
-    @NamedQuery(name = "Puesto.findAll", query = "SELECT p FROM Puesto p")
-    , @NamedQuery(name = "Puesto.findById", query = "SELECT p FROM Puesto p WHERE p.id = :id")})
+    @NamedQuery(name = "Puesto.findAll", query = "SELECT p FROM Puesto p")})
 public class Puesto implements Serializable {
 
     private static final long serialVersionUID = 1L;

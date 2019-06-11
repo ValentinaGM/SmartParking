@@ -28,10 +28,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "estacionamiento")
 @NamedQueries({
-    @NamedQuery(name = "Estacionamiento.findAll", query = "SELECT e FROM Estacionamiento e")
-    , @NamedQuery(name = "Estacionamiento.findById", query = "SELECT e FROM Estacionamiento e WHERE e.id = :id")
-    , @NamedQuery(name = "Estacionamiento.findByCantidad", query = "SELECT e FROM Estacionamiento e WHERE e.cantidad = :cantidad")
-    , @NamedQuery(name = "Estacionamiento.findByUbicacion", query = "SELECT e FROM Estacionamiento e WHERE e.ubicacion = :ubicacion")})
+    @NamedQuery(name = "Estacionamiento.findAll", query = "SELECT e FROM Estacionamiento e")})
 public class Estacionamiento implements Serializable {
 
     private static final long serialVersionUID = 1L;

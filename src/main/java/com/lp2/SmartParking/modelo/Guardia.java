@@ -31,12 +31,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "guardia")
 @NamedQueries({
-    @NamedQuery(name = "Guardia.findAll", query = "SELECT g FROM Guardia g")
-    , @NamedQuery(name = "Guardia.findById", query = "SELECT g FROM Guardia g WHERE g.id = :id")
-    , @NamedQuery(name = "Guardia.findByRut", query = "SELECT g FROM Guardia g WHERE g.rut = :rut")
-    , @NamedQuery(name = "Guardia.findByNombre", query = "SELECT g FROM Guardia g WHERE g.nombre = :nombre")
-    , @NamedQuery(name = "Guardia.findByTelefono", query = "SELECT g FROM Guardia g WHERE g.telefono = :telefono")
-    , @NamedQuery(name = "Guardia.findByEmail", query = "SELECT g FROM Guardia g WHERE g.email = :email")})
+    @NamedQuery(name = "Guardia.findAll", query = "SELECT g FROM Guardia g")})
 public class Guardia implements Serializable {
 
     private static final long serialVersionUID = 1L;

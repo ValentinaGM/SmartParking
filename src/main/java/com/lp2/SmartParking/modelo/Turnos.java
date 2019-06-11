@@ -29,10 +29,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "turnos")
 @NamedQueries({
-    @NamedQuery(name = "Turnos.findAll", query = "SELECT t FROM Turnos t")
-    , @NamedQuery(name = "Turnos.findById", query = "SELECT t FROM Turnos t WHERE t.id = :id")
-    , @NamedQuery(name = "Turnos.findByInicio", query = "SELECT t FROM Turnos t WHERE t.inicio = :inicio")
-    , @NamedQuery(name = "Turnos.findByFin", query = "SELECT t FROM Turnos t WHERE t.fin = :fin")})
+    @NamedQuery(name = "Turnos.findAll", query = "SELECT t FROM Turnos t")})
 public class Turnos implements Serializable {
 
     private static final long serialVersionUID = 1L;

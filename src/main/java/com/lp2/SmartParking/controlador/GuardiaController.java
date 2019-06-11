@@ -35,7 +35,7 @@ public class GuardiaController {
     }
     @PostMapping("/inscribeUsuario")
     public String inscribirForm(@ModelAttribute Guardia guardia){
-        System.out.println(guardia.getId()); 
+        System.out.println(guardia.getNombre()); 
         gDAO.save(guardia);
         return "login";
    

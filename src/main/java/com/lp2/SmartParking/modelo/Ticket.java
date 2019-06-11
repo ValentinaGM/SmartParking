@@ -24,7 +24,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -33,12 +32,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "ticket")
 @NamedQueries({
-    @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t")
-    , @NamedQuery(name = "Ticket.findById", query = "SELECT t FROM Ticket t WHERE t.id = :id")
-    , @NamedQuery(name = "Ticket.findByInicio", query = "SELECT t FROM Ticket t WHERE t.inicio = :inicio")
-    , @NamedQuery(name = "Ticket.findByFin", query = "SELECT t FROM Ticket t WHERE t.fin = :fin")
-    , @NamedQuery(name = "Ticket.findByTiempoEstacionado", query = "SELECT t FROM Ticket t WHERE t.tiempoEstacionado = :tiempoEstacionado")
-    , @NamedQuery(name = "Ticket.findByTicketid", query = "SELECT t FROM Ticket t WHERE t.ticketid = :ticketid")})
+    @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t")})
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,10 +50,6 @@ public class Ticket implements Serializable {
     @Column(name = "tiempo estacionado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date tiempoEstacionado;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Ticketid")
-    private int ticketid;
     @JoinColumn(name = "Estacionamientoid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estacionamiento estacionamientoid;
@@ -71,11 +61,6 @@ public class Ticket implements Serializable {
 
     public Ticket(Integer id) {
         this.id = id;
-    }
-
-    public Ticket(Integer id, int ticketid) {
-        this.id = id;
-        this.ticketid = ticketid;
     }
 
     public Integer getId() {
@@ -108,14 +93,6 @@ public class Ticket implements Serializable {
 
     public void setTiempoEstacionado(Date tiempoEstacionado) {
         this.tiempoEstacionado = tiempoEstacionado;
-    }
-
-    public int getTicketid() {
-        return ticketid;
-    }
-
-    public void setTicketid(int ticketid) {
-        this.ticketid = ticketid;
     }
 
     public Estacionamiento getEstacionamientoid() {

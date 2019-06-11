@@ -28,12 +28,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "vehiculo")
 @NamedQueries({
-    @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v")
-    , @NamedQuery(name = "Vehiculo.findById", query = "SELECT v FROM Vehiculo v WHERE v.id = :id")
-    , @NamedQuery(name = "Vehiculo.findByPatente", query = "SELECT v FROM Vehiculo v WHERE v.patente = :patente")
-    , @NamedQuery(name = "Vehiculo.findByMarca", query = "SELECT v FROM Vehiculo v WHERE v.marca = :marca")
-    , @NamedQuery(name = "Vehiculo.findByModelo", query = "SELECT v FROM Vehiculo v WHERE v.modelo = :modelo")
-    , @NamedQuery(name = "Vehiculo.findByUsuariorut", query = "SELECT v FROM Vehiculo v WHERE v.usuariorut = :usuariorut")})
+    @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v")})
 public class Vehiculo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,11 +48,6 @@ public class Vehiculo implements Serializable {
     @Size(max = 20)
     @Column(name = "modelo")
     private String modelo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 12)
-    @Column(name = "Usuariorut")
-    private String usuariorut;
     @JoinColumn(name = "Ticketid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Ticket ticketid;
@@ -75,10 +65,9 @@ public class Vehiculo implements Serializable {
         this.id = id;
     }
 
-    public Vehiculo(Integer id, String patente, String usuariorut) {
+    public Vehiculo(Integer id, String patente) {
         this.id = id;
         this.patente = patente;
-        this.usuariorut = usuariorut;
     }
 
     public Integer getId() {
@@ -111,14 +100,6 @@ public class Vehiculo implements Serializable {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public String getUsuariorut() {
-        return usuariorut;
-    }
-
-    public void setUsuariorut(String usuariorut) {
-        this.usuariorut = usuariorut;
     }
 
     public Ticket getTicketid() {
