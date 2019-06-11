@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,12 +34,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Guardia.findAll", query = "SELECT g FROM Guardia g")})
 public class Guardia implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 12)
@@ -46,12 +42,22 @@ public class Guardia implements Serializable {
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "telefono")
-    private Integer telefono;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 50)
     @Column(name = "email")
     private String email;
+    @JoinColumn(name = "Estacionamientoid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Estacionamiento estacionamientoid;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "telefono")
+    private Integer telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "guardiaid", fetch = FetchType.LAZY)
     private List<Turnos> turnosList;
 
@@ -75,21 +81,6 @@ public class Guardia implements Serializable {
         this.id = id;
     }
 
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public Integer getTelefono() {
         return telefono;
@@ -99,13 +90,6 @@ public class Guardia implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public List<Turnos> getTurnosList() {
         return turnosList;
@@ -138,6 +122,38 @@ public class Guardia implements Serializable {
     @Override
     public String toString() {
         return "com.lp2.SmartParking.modelo.Guardia[ id=" + id + " ]";
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Estacionamiento getEstacionamientoid() {
+        return estacionamientoid;
+    }
+
+    public void setEstacionamientoid(Estacionamiento estacionamientoid) {
+        this.estacionamientoid = estacionamientoid;
     }
     
 }

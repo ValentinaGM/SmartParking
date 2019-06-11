@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,6 +31,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Puesto.findAll", query = "SELECT p FROM Puesto p")})
 public class Puesto implements Serializable {
+
+    @JoinColumn(name = "Estacionamientoid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Estacionamiento estacionamientoid;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -85,6 +91,14 @@ public class Puesto implements Serializable {
     @Override
     public String toString() {
         return "com.lp2.SmartParking.modelo.Puesto[ id=" + id + " ]";
+    }
+
+    public Estacionamiento getEstacionamientoid() {
+        return estacionamientoid;
+    }
+
+    public void setEstacionamientoid(Estacionamiento estacionamientoid) {
+        this.estacionamientoid = estacionamientoid;
     }
     
 }

@@ -31,12 +31,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v")})
 public class Vehiculo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -48,6 +42,13 @@ public class Vehiculo implements Serializable {
     @Size(max = 20)
     @Column(name = "modelo")
     private String modelo;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @JoinColumn(name = "Puestoid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Puesto puestoid;
@@ -78,29 +79,6 @@ public class Vehiculo implements Serializable {
         this.id = id;
     }
 
-    public String getPatente() {
-        return patente;
-    }
-
-    public void setPatente(String patente) {
-        this.patente = patente;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
 
     public Puesto getPuestoid() {
         return puestoid;
@@ -149,6 +127,30 @@ public class Vehiculo implements Serializable {
     @Override
     public String toString() {
         return "com.lp2.SmartParking.modelo.Vehiculo[ id=" + id + " ]";
+    }
+
+    public String getPatente() {
+        return patente;
+    }
+
+    public void setPatente(String patente) {
+        this.patente = patente;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
     
 }
