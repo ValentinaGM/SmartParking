@@ -19,7 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -29,11 +28,12 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "usuario")
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+        (name = "Usuario.findByRut", query = "SELECT u FROM Usuario u WHERE Rut")})
 public class Usuario implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 12)
     @Column(name = "rut")
     private String rut;

@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 /**
  *
@@ -28,19 +28,21 @@ public class UsuarioController {
     private UsuarioDAO uDAO;
     
     @GetMapping("/login")
-    public String usuarios(Model model) {
+    public String usuario(Model model) {
         
-        List<Usuario> usuarios = uDAO.findAll();
-        model.addAttribute("usuario", usuarios);
+       // List<Usuario> usuarios = uDAO.findAll();
+        model.addAttribute("Usuario", new Usuario());
+        
         return "login"; 
     }
-    
-    /*
-    @PostMapping("/inscribeUsuario")
-    public String inscribirForm(@ModelAttribute Usuario usuario){
-        System.out.println(usuario.getNombre()); 
-        uDAO.save(usuario);
+    @PostMapping("/login")
+    public String loginForm(@ModelAttribute Usuario usuario, Model model){
+        String r = usuario.getRut();
+        Usuario ubd = uDAO.findByRut(r);
+       
+        model.addAttribute("valido", ubd.getContraseña().equals(usuario.getContraseña()));
+           
         return "login";
-        
-    }*/
-}
+    }
+} 
+
