@@ -15,34 +15,52 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 /**
  *
  * @author Valentina
  */
-
 @Controller
 public class UsuarioController {
-    
+
     @Autowired
     private UsuarioDAO uDAO;
     
     @GetMapping("/login")
     public String usuario(Model model) {
-        
-       // List<Usuario> usuarios = uDAO.findAll();
-        model.addAttribute("Usuario", new Usuario());
-        
-        return "login"; 
-    }
-    @PostMapping("/login")
-    public String loginForm(@ModelAttribute Usuario usuario, Model model){
-        String r = usuario.getRut();
-        Usuario ubd = uDAO.findByRut(r);
-       
-        model.addAttribute("valido", ubd.getContraseña().equals(usuario.getContraseña()));
-           
+
+        // List<Usuario> usuarios = uDAO.findAll();
+      //  model.addAttribute("Usuario", new Usuario());
+      //preguntaar
+
         return "login";
     }
-} 
+    
+    @PostMapping("/login")
+    public String loginForm(@ModelAttribute Usuario usuario, Model model) {
+        String r = usuario.getRut();
+        String p = usuario.getContraseña();
+        Usuario ubd = uDAO.findByRut(r); 
+        if(ubd!= null && ubd.getRut().equals(r) && ubd.getContraseña().equals(p)) {
+            return "index";
+        }
+        
+        model.addAttribute("invalido", true);
 
+        return "login";
+    }
+    /*
+    @GetMapping("/register")
+    public String usuarios(Model model) {
+
+        model.addAttribute("Usuario", new Usuario());
+        return "index";
+    }
+
+    @PostMapping("/register")
+    public String inscribirForm(@ModelAttribute Usuario usuario) {
+        System.out.println(usuario.getNombre());
+        uDAO.save(usuario);
+        return "index";
+    }
+    */
+}

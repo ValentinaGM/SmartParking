@@ -10,26 +10,27 @@ and open the template in the editor.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartParking</title>
-    <!---->
-    <link rel="stylesheet" th:href="@{../static/assets/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{../static/assets/fonts/ionicons.min.css}">
-    <link rel="stylesheet" th:href="@{../static/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700}">
-    <link rel="stylesheet" th:href="@{../static//assets/css/Header-Blue.css}">
-    <link rel="stylesheet" th:href="@{../static/assets/css/Login-Form-Dark.css}">
-    <link rel="stylesheet" th:href="@{../static/assets/css/Registration-Form-with-Photo.css}">
-    <link rel="stylesheet" th:href="@{../static/assets/css/styles.css}">
+    
+    <link href="../assets/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="../assets/fonts/ionicons.min.css" th:href="@{/fonts/ionicons.min.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+    <link href="../assets/css/Header-Blue.css" th:href="@{css/Header-Blue.css}" rel="stylesheet">
+    <link href="../assets/css/Login-Form-Dark.css" th:href="@{css/Login-Form-Dark.css}" rel="stylesheet">
+    <link href="../assets/css/Registration-Form-with-Photo.css" th:href="@{css/Registration-Form-with-Photo.css}" rel="stylesheet">
+    <link href="../assets/css/styles.css" th:href="@{css/styles.css}" rel="stylesheet"> 
 </head>
 
 <body>
     <div class="login-dark"
         style="background-color:rgb(24,78,142);background-image:url(&quot;../static/img/loginBackground.jpg&quot;);">
-        <form method="post">
+        <form th:action="@{/login}" th:object="${usuario}" method="post">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div><input class="form-control"
-                type="text" placeholder="Rut">
-            <div class="form-group"><input class="form-control" type="password" name="password"
-                    placeholder="Contraseña"></div>
+                type="text" name="rut" placeholder="Rut">
+            <div class="form-group"><input class="form-control" type="password" 
+                    name="contraseña" placeholder="Contraseña"></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Ingresar</button></div>
+           <p th:if="${invalido}"> Usuario o clave incorrecta</p> 
             <button class="btn btn-primary btn-block" type="submit">Volver a inicio</button>
         </form>
     </div>
