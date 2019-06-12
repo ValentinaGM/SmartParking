@@ -27,13 +27,8 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+public class Usuario extends UsuarioBase implements Serializable {
 
-    @Basic(optional = false)
-
-    @Size(min = 1, max = 12)
-    @Column(name = "rut")
-    private String rut;
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
@@ -41,39 +36,13 @@ public class Usuario implements Serializable {
     @Size(max = 50)
     @Column(name = "email")
     private String email;
-    @Size(max = 50)
-    @Column(name = "contrase\u00f1a")
-    private String contraseña;
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioid", fetch = FetchType.LAZY)
     private List<Vehiculo> vehiculoList;
 
     public Usuario() {
     }
-
-    public Usuario(Integer id) {
-        this.id = id;
-    }
-
-    public Usuario(Integer id, String rut) {
-        this.id = id;
-        this.rut = rut;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 
     public List<Vehiculo> getVehiculoList() {
         return vehiculoList;
@@ -84,36 +53,8 @@ public class Usuario implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.lp2.SmartParking.modelo.Usuario[ id=" + id + " ]";
-    }
-
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
+        return "com.lp2.SmartParking.modelo.Usuario[ id=" + this.getId() + " ]";
     }
 
     public String getNombre() {
@@ -132,12 +73,4 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-    
 }

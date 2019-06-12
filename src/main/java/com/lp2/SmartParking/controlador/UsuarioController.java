@@ -60,7 +60,8 @@ public class UsuarioController {
     public String inscribirForm(@ModelAttribute Usuario usuario) {
         System.out.println(usuario.getNombre());
         uDAO.save(usuario);
-        return "index";
+        return "index"; valido o invalido
     }
     */
+    
 }
