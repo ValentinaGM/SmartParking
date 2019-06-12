@@ -5,18 +5,13 @@
  */
 package com.lp2.SmartParking.dao;
 
-import com.lp2.SmartParking.modelo.Guardia;
-import com.lp2.SmartParking.modelo.Usuario;
-import java.util.List;
+import com.lp2.SmartParking.modelo.UsuarioBase;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author Valentina
  */
-public interface GuardiaDAO extends CrudRepository<Guardia, Long> {
-      @Override
-    public List<Guardia> findAll();
-     public Guardia findByRut (String rut); 
-     
+public interface UsuarioBaseDAO extends CrudRepository<UsuarioBase, Long> {
+    
 }

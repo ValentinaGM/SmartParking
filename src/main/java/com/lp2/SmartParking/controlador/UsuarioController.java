@@ -48,20 +48,19 @@ public class UsuarioController {
 
         return "login";
     }
-    /*
-    @GetMapping("/register")
+   
+    @GetMapping("/registrar")
     public String usuarios(Model model) {
 
         model.addAttribute("Usuario", new Usuario());
-        return "index";
+        return "registrar";
     }
 
     @PostMapping("/register")
     public String inscribirForm(@ModelAttribute Usuario usuario) {
         System.out.println(usuario.getNombre());
         uDAO.save(usuario);
-        return "index"; valido o invalido
+        return "registrar"; 
     }
-    */
     
 }
