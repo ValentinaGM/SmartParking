@@ -2,7 +2,7 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Inicio</title>
+    <title>Nosotros</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <a class="navbar-brand" href="#" th:href="@{/}">SmartPark UFRO</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
@@ -35,25 +36,20 @@
         </div>
     </nav>
 
-    <br>
-
-    <div class="jumbotron">
-        <h1 class="display-3">Regístrate!</h1>
-        <p class="lead">SmartPark UFRO ha llegado! Regístrate ahora y consulta desde la comodidad de tu celular la
-            disponibilidad de
-            puestos en cualquier estacionamiento de la institución.</p>
-        <hr class="my-2">
-
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button" th:href="@{/registrar}">Registrarse</a>
-        </p>
+    <div class="jumbotron text-center">
+        <h1>SmartPark UFRO</h1>
+        <p>Proyecto final de asignatura.</p>
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="email" class="form-control" size="50" placeholder="Email" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger">Contáctanos</button>
+                </div>
+            </div>
+        </form>
     </div>
 
-
-
-
-
-
+    
 
 
     <!-- Optional JavaScript -->
