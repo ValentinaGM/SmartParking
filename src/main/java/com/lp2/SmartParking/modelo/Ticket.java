@@ -51,7 +51,7 @@ public class Ticket implements Serializable {
     @Column(name = "fin")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fin;
-    @Column(name = "tiempo estacionado")
+    @Column(name = "tiempo_estacionado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date tiempoEstacionado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticketid", fetch = FetchType.LAZY)
