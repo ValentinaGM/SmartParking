@@ -22,7 +22,7 @@ public class GuardiaController {
     @RequestMapping("/url")
     public String page(Model model) {
         model.addAttribute("attribute", "value");
-        return "view.name";
+        return "vistaGuardia";
     }
     
 }
