@@ -22,7 +22,7 @@ and open the template in the editor.
 
 <body>
     <div class="login-dark"
-        style="background-color:rgb(24,78,142);background-image:url(&quot;../static/img/loginBackground.jpg&quot;);">
+        style="background-color:rgb(24,78,142);">
         <form th:action="@{/login}" th:object="${usuario}" method="post">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div><input class="form-control"
@@ -31,14 +31,19 @@ and open the template in the editor.
                     name="contraseña" placeholder="Contraseña"></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Ingresar</button></div>
            <p th:if="${invalido}"> Usuario o clave incorrecta</p> 
-            <button class="btn btn-primary btn-block" type="submit">Volver a inicio</button>
+            <button class="btn btn-primary btn-block" type="button" onclick="volver()">Volver a inicio</button>
         </form>
     </div>
 
 
 
-    <script src="@{/assets/js/jquery.min.js}"></script>
-    <script src="@{/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script>
+        function volver(){
+           location.href="index"; 
+        }
+    </script>
 </body>
 
 </html>

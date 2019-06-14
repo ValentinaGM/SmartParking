@@ -37,6 +37,7 @@ public class UsuarioController {
     
     @PostMapping("/login")
     public String loginForm(@ModelAttribute Usuario usuario, Model model) {
+        model.addAttribute("invalido", false);
         String r = usuario.getRut();
         String p = usuario.getContraseña();
         Usuario ubd = uDAO.findByRut(r); 
