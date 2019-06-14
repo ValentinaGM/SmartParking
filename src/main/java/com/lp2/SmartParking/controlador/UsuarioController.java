@@ -42,7 +42,7 @@ public class UsuarioController {
         String p = usuario.getContraseña();
         Usuario ubd = uDAO.findByRut(r); 
         if(ubd!= null && ubd.getRut().equals(r) && ubd.getContraseña().equals(p)) {
-            return "index";
+            return "vistaUsuario";
         }
         
         model.addAttribute("invalido", true);
