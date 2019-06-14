@@ -47,7 +47,7 @@ public class UsuarioController {
         
         model.addAttribute("invalido", true);
 
-        return "vistaUsuario";
+        return "index";
     }
    
     @GetMapping("/registrar")
