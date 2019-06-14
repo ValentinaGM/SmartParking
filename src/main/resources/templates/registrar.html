@@ -1,52 +1,58 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title> Registrarse </title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <title> Registrarse </title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link href="../assets/css/estilo.css" th:href="@{/assets/css/estilo.css}" rel="stylesheet">    
-    <link href="../assets/bootstrap/css/bootstrap.min.css" th:href="@{assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-  </head>
-  <body background="https://i1.wp.com/seumarketingnaweb.com.br/wp-content/uploads/2016/02/azul-degrade.jpg?ssl=1">
+                <!-- Bootstrap CSS -->
+                <link href="../assets/css/estilo.css" th:href="@{/assets/css/estilo.css}" rel="stylesheet">    
+                    <link href="../assets/bootstrap/css/bootstrap.min.css" th:href="@{assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+                    </head>
+                    <body background="https://i1.wp.com/seumarketingnaweb.com.br/wp-content/uploads/2016/02/azul-degrade.jpg?ssl=1">
 
-       
-    <div class="container">        
-        <div class="col-md-4 offset-md-4">  
-            <h1 class="text-white"> Registrarse </h1>
-         <form th:action="@{/registrar}" th:object="${usuario}" method="post">
-             <div class="form-group">
-               <label for="rut">Rut</label>
-               <input type="text" class="form-control" id="rut" name="rut" placeholder="Ej: 18302504-4">              
-             </div>
-             <div class="form-group">
-               <label for="nombre">Nombre</label>
-               <input type="text" class="form-control" id="nombre" name="nombre" >              
-             </div>
-             <div class="form-group">
-               <label for="email">Email</label>
-               <input type="text" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com">              
-             </div>
-             <div class="form-group">
-               <label for="exampleInputPassword1">Contraseña</label>
-               <input type="password" class="form-control" id="exampleInputPassword1">
-             </div>
-             <div class="form-group text-center">
-               <button id="buton" type="submit" class="btn btn-primary" >Registrar</button>
-             </div>
 
-           </form>
-        </div>
-    </div>
+                        <div class="container">        
+                            <div class="col-md-4 offset-md-4">  
+                                <h1 class="text-white"> Registrarse </h1>
+                                <form th:action="@{/registrar}" th:object="${usuario}" method="post">
+                                    <div class="form-group">
+                                        <label for="rut">Rut</label>
+                                        <input type="text" id="rut" name="rut" class="form-control" placeholder="Ej: 18302504-4">              
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" id="Nombre" name="nombre" class="form-control" >          
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" id="email" name="email" class="form-control" >             
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contraseña">Contraseña</label>
+                                        <input type="password" id="contraseña" name="contraseña" class="form-control" >
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="buton" type="submit" class="btn btn-primary" >Registrar</button>
+                                        <button class="btn btn-danger" type="button" onclick="volver()">Volver a inicio</button>
+                                    </div>
 
-   
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Optional JavaScript -->
+                        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                        <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                        <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+                        <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                        <script>
+                            function volver() {
+                                location.href = "index";
+                            }
+                        </script>
+                    </body>
+                    </html>
