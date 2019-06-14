@@ -56,7 +56,7 @@ public class UsuarioController {
         return "registrar";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/registrar")
     public String inscribirForm(@ModelAttribute Usuario usuario) {
         System.out.println(usuario.getNombre());
         uDAO.save(usuario);
