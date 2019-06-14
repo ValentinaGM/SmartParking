@@ -37,7 +37,6 @@ public class UsuarioController {
     
     @PostMapping("/login")
     public String loginForm(@ModelAttribute Usuario usuario, Model model) {
-        model.addAttribute("invalido", false);
         String r = usuario.getRut();
         String p = usuario.getContraseña();
         Usuario ubd = uDAO.findByRut(r); 
@@ -57,7 +56,7 @@ public class UsuarioController {
         return "registrar";
     }
 
-    @PostMapping("/registrar")
+    @PostMapping("/register")
     public String inscribirForm(@ModelAttribute Usuario usuario) {
         System.out.println(usuario.getNombre());
         uDAO.save(usuario);

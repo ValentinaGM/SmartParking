@@ -1,8 +1,20 @@
-.container{
-    padding-top: 10%;
+.conteiner{
+    padding-top: 11%;
     padding-left: 40%;
     padding-right: 40%;
 }
+.btn{
+    margin-left: 25%;
+    border-color: #ffffff;
+}
 
+.container{
+    padding-top: 10px;
+}
 
+a{
+    font-size: 3rem;
+    color: #ffffff;
+
+}
 
