@@ -8,7 +8,7 @@ package com.lp2.SmartParking.controlador;
 import com.lp2.SmartParking.dao.GuardiaDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -19,9 +19,9 @@ public class GuardiaController {
     private GuardiaDAO gDAO;
     
     
-    @RequestMapping("/url")
+    @GetMapping("/vistaGuardia")
     public String page(Model model) {
-        model.addAttribute("attribute", "value");
+       
         return "vistaGuardia";
     }
     

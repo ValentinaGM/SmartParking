@@ -26,7 +26,7 @@ public abstract class UsuarioBase {
     @Column(name="id",nullable = false, length = 11)
     @Id
     @GeneratedValue (strategy = GenerationType.TABLE)
-    private Long id;
+    private int id;
     
     @Basic(optional = false)
     @Size(min = 1, max = 12)
@@ -40,11 +40,11 @@ public abstract class UsuarioBase {
     public UsuarioBase() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

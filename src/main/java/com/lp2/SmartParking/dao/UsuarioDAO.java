@@ -14,7 +14,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  *
  * @author Valentina
  */
-public interface UsuarioDAO extends CrudRepository<Usuario, Long> {
+public interface UsuarioDAO extends CrudRepository<Usuario, Integer> {
      @Override
     public List<Usuario> findAll(); 
     

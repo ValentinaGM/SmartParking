@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Valentina
  */
-public interface UsuarioBaseDAO extends CrudRepository<UsuarioBase, Long> {
-    
+public interface UsuarioBaseDAO extends CrudRepository<UsuarioBase, Integer> {
+    public UsuarioBase findByRut (String rut);
 }

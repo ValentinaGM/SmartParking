@@ -14,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Valentina
  */
-public interface GuardiaDAO extends CrudRepository<Guardia, Long> {
+public interface GuardiaDAO extends CrudRepository<Guardia, Integer> {
       @Override
     public List<Guardia> findAll();
      public Guardia findByRut (String rut); 

@@ -5,8 +5,10 @@
  */
 package com.lp2.SmartParking.controlador;
 
-import com.lp2.SmartParking.dao.UsuarioDAO;
+import com.lp2.SmartParking.dao.UsuarioBaseDAO;
+import com.lp2.SmartParking.modelo.Guardia;
 import com.lp2.SmartParking.modelo.Usuario;
+import com.lp2.SmartParking.modelo.UsuarioBase;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,33 +25,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioDAO uDAO;
-    
+    private UsuarioBaseDAO uDAO;
+
     @GetMapping("/login")
     public String usuario(Model model) {
 
         // List<Usuario> usuarios = uDAO.findAll();
-      //  model.addAttribute("Usuario", new Usuario());
-      //preguntaar
-
+        //  model.addAttribute("Usuario", new Usuario());
+        //preguntaar
         return "login";
     }
-    
+
     @PostMapping("/login")
-    public String loginForm(@ModelAttribute Usuario usuario, Model model) {
+    public String loginForm(@ModelAttribute UsuarioBase usuario, Model model) {
         model.addAttribute("invalido", false);
         String r = usuario.getRut();
         String p = usuario.getContraseña();
-        Usuario ubd = uDAO.findByRut(r); 
-        if(ubd!= null && ubd.getRut().equals(r) && ubd.getContraseña().equals(p)) {
-            return "vistaUsuario";
+        UsuarioBase ubd = uDAO.findByRut(r);
+        String vista = "";
+        if (ubd != null) {
+            if (ubd instanceof Usuario) {
+                vista = "vistaUsuario";
+            } else if (ubd instanceof Guardia) {
+                vista = "vistaGuardia";
+            }
+        } else {
+            model.addAttribute("invalido", true);
+            vista = "login";
         }
-        
-        model.addAttribute("invalido", true);
-
-        return "vistaGuardia";
+        return vista;
     }
-   
+
     @GetMapping("/registrar")
     public String usuarios(Model model) {
 
@@ -61,7 +67,13 @@ public class UsuarioController {
     public String inscribirForm(@ModelAttribute Usuario usuario) {
         System.out.println(usuario.getNombre());
         uDAO.save(usuario);
-        return "registrar"; 
+        return "registrar";
     }
-    
+
+    @GetMapping("/vistaUsuario")
+    public String page(Model model) {
+
+        return "vistaUsuario";
+    }
+
 }
