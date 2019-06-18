@@ -28,8 +28,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "puesto")
-@NamedQueries({
-    @NamedQuery(name = "Puesto.findAll", query = "SELECT p FROM Puesto p")})
+
 public class Puesto implements Serializable {
 
     @JoinColumn(name = "Estacionamientoid", referencedColumnName = "id")
@@ -42,6 +41,9 @@ public class Puesto implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "estado")
+    private boolean estado;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "puestoid", fetch = FetchType.LAZY)
     private List<Vehiculo> vehiculoList;
 
@@ -58,6 +60,14 @@ public class Puesto implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public List<Vehiculo> getVehiculoList() {

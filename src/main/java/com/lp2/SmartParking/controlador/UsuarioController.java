@@ -5,8 +5,11 @@
  */
 package com.lp2.SmartParking.controlador;
 
+import com.lp2.SmartParking.dao.PuestoDAO;
 import com.lp2.SmartParking.dao.UsuarioBaseDAO;
+import com.lp2.SmartParking.dao.UsuarioDAO;
 import com.lp2.SmartParking.modelo.Guardia;
+import com.lp2.SmartParking.modelo.Puesto;
 import com.lp2.SmartParking.modelo.Usuario;
 import com.lp2.SmartParking.modelo.UsuarioBase;
 import java.util.List;
@@ -25,7 +28,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioBaseDAO uDAO;
+    private UsuarioBaseDAO ubDAO;
+    private UsuarioDAO uDAO;
+    private PuestoDAO pDAO;
 
     @GetMapping("/login")
     public String usuario(Model model) {
@@ -41,7 +46,7 @@ public class UsuarioController {
         model.addAttribute("invalido", false);
         String r = usuario.getRut();
         String p = usuario.getContraseña();
-        UsuarioBase ubd = uDAO.findByRut(r);
+        UsuarioBase ubd = ubDAO.findByRut(r);
         String vista = "";
         if (ubd != null) {
             if (ubd instanceof Usuario) {
@@ -72,7 +77,8 @@ public class UsuarioController {
 
     @GetMapping("/vistaUsuario")
     public String page(Model model) {
-
+        List<Puesto> puestos = pDAO.findAll();
+        model.addAttribute("puestosBD", puestos);
         return "vistaUsuario";
     }
 

@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
  */
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity 
-public abstract class UsuarioBase {
+public class UsuarioBase {
      
     @Column(name="id",nullable = false, length = 11)
     @Id

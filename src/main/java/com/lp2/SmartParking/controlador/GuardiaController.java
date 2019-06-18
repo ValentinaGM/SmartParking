@@ -9,6 +9,7 @@ import com.lp2.SmartParking.dao.GuardiaDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -24,5 +25,13 @@ public class GuardiaController {
        
         return "vistaGuardia";
     }
+    
+    @PostMapping("/cambiarEstado")
+    public String cambiarEstado(Model model) {
+        
+        return "vistaGuardia";
+    }
+    
+    
     
 }

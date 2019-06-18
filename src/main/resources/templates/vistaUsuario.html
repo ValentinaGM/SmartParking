@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" xmlns="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Panel Usuario</title>
@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#">SmartPark UFRO <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#" th:href="@{/}">Salir</a>
+            <a class="nav-item nav-link" th:href="@{/login}">Salir</a>
         </div>
     </nav>
 
@@ -30,81 +30,14 @@
             <thead class="thead-inverse">
             <tbody>
                 <tr>
-                    <td>
+                    <td th:each="p : ${puestosBD}">
                         <label class="switch disabled">
-                            <input type="checkbox" disabled>
+                            <input type="checkbox" th:id="${p.id}" disabled>
                             <span class="slider"></span>
                         </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
+                    </td>                    
                 </tr>
-                <tr>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" disabled>
-                            <span class="slider"></span>
-                        </label>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
 

@@ -6,6 +6,7 @@
 package com.lp2.SmartParking.dao;
 
 import com.lp2.SmartParking.modelo.Puesto;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +14,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Valentina
  */
 public interface PuestoDAO extends CrudRepository<Puesto, Integer> {
-    
+    @Override
+    public List<Puesto> findAll(); 
 }
