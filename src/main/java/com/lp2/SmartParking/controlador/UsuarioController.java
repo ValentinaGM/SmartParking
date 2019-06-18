@@ -29,7 +29,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioBaseDAO ubDAO;
+    @Autowired
     private UsuarioDAO uDAO;
+    @Autowired
     private PuestoDAO pDAO;
 
     @GetMapping("/login")
@@ -78,6 +80,7 @@ public class UsuarioController {
     @GetMapping("/vistaUsuario")
     public String page(Model model) {
         List<Puesto> puestos = pDAO.findAll();
+        System.out.println(puestos.get(0));
         model.addAttribute("puestosBD", puestos);
         return "vistaUsuario";
     }
