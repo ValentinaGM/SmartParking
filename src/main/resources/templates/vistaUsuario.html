@@ -32,7 +32,7 @@
                 <tr>
                     <td th:each="p : ${puestosBD}">
                         <label class="switch disabled">
-                            <input type="checkbox" th:text="${p.id}"disabled>
+                            <input type="checkbox" th:id="${p.id}"disabled>
                             <span class="slider" ></span>
                         </label>
                     </td>                    

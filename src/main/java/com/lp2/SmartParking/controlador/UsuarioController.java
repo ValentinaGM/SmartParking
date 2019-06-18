@@ -12,7 +12,9 @@ import com.lp2.SmartParking.modelo.Guardia;
 import com.lp2.SmartParking.modelo.Puesto;
 import com.lp2.SmartParking.modelo.Usuario;
 import com.lp2.SmartParking.modelo.UsuarioBase;
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +46,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public String loginForm(@ModelAttribute UsuarioBase usuario, Model model) {
+    public void loginForm(@ModelAttribute UsuarioBase usuario, Model model, HttpServletResponse response) throws IOException {
         model.addAttribute("invalido", false);
         String r = usuario.getRut();
         String p = usuario.getContraseña();
@@ -52,15 +54,15 @@ public class UsuarioController {
         String vista = "";
         if (ubd != null) {
             if (ubd instanceof Usuario) {
-                vista = "vistaUsuario";
+                response.sendRedirect("vistaUsuario");
             } else if (ubd instanceof Guardia) {
-                vista = "vistaGuardia";
+                response.sendRedirect("vistaGuardia");
             }
         } else {
             model.addAttribute("invalido", true);
-            vista = "login";
+            response.sendRedirect("login");
         }
-        return vista;
+     
     }
 
     @GetMapping("/registrar")
