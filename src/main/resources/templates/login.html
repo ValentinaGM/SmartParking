@@ -33,16 +33,16 @@ and open the template in the editor.
                                                     <p th:if="${invalido}"> Usuario o clave incorrecta</p> 
                                                     <button class="btn btn-primary btn-block" type="button" onclick="volver()">Volver a inicio</button>
                                             </form>
-                                        </div>
-
-
-
+                                        </div> 
                                         <script th:src="@{/assets/js/jquery.min.js}"></script>
                                         <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+                                        <!--<script th: src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
                                         <script>
                                             function volver() {
                                                 location.href = "index";
                                             }
+
+
                                         </script>
                                     </body>
 

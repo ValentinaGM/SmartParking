@@ -1,111 +1,125 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <title>Panel Usuario</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <title>Panel Usuario</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-    <!-- la idea es con thymeleaf generar los tr y td de la tabla -->
-<body>
-    <nav class="navbar navbar-expand navbar-light bg-light">
-        <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="#">SmartPark UFRO <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" th:href="@{/login}">Salir</a>
-        </div>
-    </nav>
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+                    </head>
+                    <!-- la idea es con thymeleaf generar los tr y td de la tabla -->
+                    <body>
+                        <nav class="navbar navbar-expand navbar-light bg-light">
+                            <div class="nav navbar-nav">
+                                <a class="nav-item nav-link active" href="#">SmartPark UFRO <span class="sr-only">(current)</span></a>
+                                <a class="nav-item nav-link" th:href="@{/login}">Salir</a>
+                            </div>
+                        </nav>
 
-    <div class="container">
-        <p>Bienvenido, </p>
-    </div>
+                        <div class="container">
+                            <p>Bienvenido, </p>
+                        </div>
 
-    <div class="container">
+                        <div class="container">
+                            <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
+                            <table id="puestos" class="table table-inverse table-responsive">
+                                <thead class="thead-inverse">
+                                    <tbody>
+                                        <tr>
+                                            <td th:each="p : ${puestosBD}">
+                                                <label th:if="${!p.estado}" class="switch disabled">
+                                                    <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
+                                                        <span class="slider" ></span>
+                                                </label>
+                                                <label th:if="${p.estado}" class="switch disabled">
+                                                    <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
+                                                        <span class="slider" ></span> 
+                                                </label>
+                                            </td>                    
+                                        </tr>
 
-        <table class="table table-inverse table-responsive">
-            <thead class="thead-inverse">
-            <tbody>
-                <tr>
-                    <td th:each="p : ${puestosBD}">
-                        <label class="switch disabled">
-                            <input type="checkbox" th:id="${p.id}"disabled>
-                            <span class="slider" ></span>
-                        </label>
-                    </td>                    
-                </tr>
-                
-            </tbody>
-        </table>
+                                    </tbody>
+                            </table>
 
-    </div>
+                        </div>
 
-    <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
+                        <style>
+                            .switch {
+                                position: relative;
+                                display: inline-block;
+                                width: 60px;
+                                height: 34px;
+                            }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+                            .switch input {
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            }
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: green;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
+                            .slider {
+                                position: absolute;
+                                cursor: pointer;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                bottom: 0;
+                                background-color: green;
+                                -webkit-transition: .4s;
+                                transition: .4s;
+                            }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
+                            .slider:before {
+                                position: absolute;
+                                content: "";
+                                height: 26px;
+                                width: 26px;
+                                left: 4px;
+                                bottom: 4px;
+                                background-color: white;
+                                -webkit-transition: .4s;
+                                transition: .4s;
+                            }
 
-        input:checked+.slider {
-            background-color: red;
-        }
+                            input:checked+.slider {
+                                background-color: red;
+                            }
 
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
+                            input:focus+.slider {
+                                box-shadow: 0 0 1px #2196F3;
+                            }
 
-        input:checked+.slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-    </style>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-</body>
+                            input:checked+.slider:before {
+                                -webkit-transform: translateX(26px);
+                                -ms-transform: translateX(26px);
+                                transform: translateX(26px);
+                            }
+                        </style>
+                        <!-- Optional JavaScript -->
+                        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                        crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                        crossorigin="anonymous"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                        crossorigin="anonymous"></script>
+                        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                        <script type="text/javascript">
 
-</html>
+                                                        function actualizar() {
+                                                            location.reload();
+                                                        }
+
+
+                        </script>
+
+                    </body>
+
+                    </html>

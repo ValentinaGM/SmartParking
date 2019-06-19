@@ -21,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 /**
  *
@@ -41,7 +43,7 @@ public class UsuarioController {
 
         // List<Usuario> usuarios = uDAO.findAll();
         //  model.addAttribute("Usuario", new Usuario());
-        //preguntaar
+        //aun no se si sirve
         return "login";
     }
 
@@ -62,7 +64,7 @@ public class UsuarioController {
             model.addAttribute("invalido", true);
             response.sendRedirect("login");
         }
-     
+
     }
 
     @GetMapping("/registrar")
@@ -79,12 +81,13 @@ public class UsuarioController {
         return "registrar";
     }
 
-    @GetMapping("/vistaUsuario")
+    @GetMapping("/vistaUsuario")    
     public String page(Model model) {
         List<Puesto> puestos = pDAO.findAll();
         System.out.println(puestos.get(0));
-        model.addAttribute("puestosBD", puestos);
+        model.addAttribute("puestosBD", puestos);   
         return "vistaUsuario";
-    }
+    }    
+    
 
 }

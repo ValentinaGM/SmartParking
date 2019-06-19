@@ -16,4 +16,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface PuestoDAO extends CrudRepository<Puesto, Integer> {
     @Override
     public List<Puesto> findAll(); 
+    public Puesto findById(int id);
 }
