@@ -42,10 +42,8 @@ public class Puesto implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Column(name = "estado")
-    private boolean estado;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "puestoid", fetch = FetchType.LAZY)
-    private List<Vehiculo> vehiculoList;
+    private boolean estado;    
+   
 
     public Puesto() {
     }
@@ -69,14 +67,7 @@ public class Puesto implements Serializable {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
-    public List<Vehiculo> getVehiculoList() {
-        return vehiculoList;
-    }
-
-    public void setVehiculoList(List<Vehiculo> vehiculoList) {
-        this.vehiculoList = vehiculoList;
-    }
+   
 
     @Override
     public int hashCode() {

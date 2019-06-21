@@ -48,10 +48,7 @@ public class Vehiculo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
-    @JoinColumn(name = "Puestoid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Puesto puestoid;
+    private Integer id;    
     @JoinColumn(name = "Usuarioid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuarioid;
@@ -77,16 +74,7 @@ public class Vehiculo implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-
-    public Puesto getPuestoid() {
-        return puestoid;
-    }
-
-    public void setPuestoid(Puesto puestoid) {
-        this.puestoid = puestoid;
-    }
+    }    
 
     public Usuario getUsuarioid() {
         return usuarioid;

@@ -8,10 +8,12 @@ package com.lp2.SmartParking.controlador;
 import com.lp2.SmartParking.dao.PuestoDAO;
 import com.lp2.SmartParking.dao.UsuarioBaseDAO;
 import com.lp2.SmartParking.dao.UsuarioDAO;
+import com.lp2.SmartParking.dao.VehiculoDAO;
 import com.lp2.SmartParking.modelo.Guardia;
 import com.lp2.SmartParking.modelo.Puesto;
 import com.lp2.SmartParking.modelo.Usuario;
 import com.lp2.SmartParking.modelo.UsuarioBase;
+import com.lp2.SmartParking.modelo.Vehiculo;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +39,9 @@ public class UsuarioController {
     private UsuarioDAO uDAO;
     @Autowired
     private PuestoDAO pDAO;
+    @Autowired
+    private VehiculoDAO vDAO;
+
 
     @GetMapping("/login")
     public String usuario(Model model) {
@@ -78,6 +83,13 @@ public class UsuarioController {
     public String inscribirForm(@ModelAttribute Usuario usuario) {
         System.out.println(usuario.getNombre());
         uDAO.save(usuario);
+        return "registrar";
+    }
+    
+    @PostMapping("/registrarVehiculo")
+    public String vehiculoForm(@ModelAttribute Vehiculo vehiculo) {
+        
+        vDAO.save(vehiculo);
         return "registrar";
     }
 
