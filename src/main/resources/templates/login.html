@@ -30,7 +30,7 @@ and open the template in the editor.
                                                     <div class="form-group"><input class="form-control" type="password" 
                                                                                    name="contraseña" placeholder="Contraseña"></div>
                                                     <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Ingresar</button></div>
-                                                    <p th:if="${invalido}"> Usuario o clave incorrecta</p> 
+                                                    <p th:if="${error}"> Usuario o clave incorrecta</p> 
                                                     <button class="btn btn-primary btn-block" type="button" onclick="volver()">Volver a inicio</button>
                                             </form>
                                         </div> 

@@ -53,7 +53,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public void loginForm(@ModelAttribute UsuarioBase usuario, Model model, HttpServletResponse response) throws IOException {
+    public String loginForm(@ModelAttribute UsuarioBase usuario, Model model, HttpServletResponse response) throws IOException {
         model.addAttribute("invalido", false);
         String r = usuario.getRut();
         String p = usuario.getContraseña();
@@ -62,14 +62,16 @@ public class UsuarioController {
         if (ubd != null) {
             if (ubd instanceof Usuario) {
                 response.sendRedirect("vistaUsuario");
+                model.addAttribute("id", ubd.getId() );
             } else if (ubd instanceof Guardia) {
                 response.sendRedirect("vistaGuardia");
             }
         } else {
-            model.addAttribute("invalido", true);
-            response.sendRedirect("login");
+            model.addAttribute("error", true);
+            return "login";
+            
         }
-
+            return null;
     }
 
     @GetMapping("/registrar")
