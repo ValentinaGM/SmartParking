@@ -7,12 +7,14 @@
         <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-                <!-- Bootstrap CSS -->
+                
+            <!-- Bootstrap CSS -->
+            
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
                     </head>
                     <!-- la idea es con thymeleaf generar los tr y td de la tabla -->
-                    <body style="background-image: url('fondoGeneral.jpg')">
+                    <body style="background-image: url('calle.jpg')">
                         <nav class="navbar navbar-expand navbar-light bg-light">
                             <div class="nav navbar-nav">
                                 <a class="nav-item nav-link active" href="#">SmartPark UFRO <span class="sr-only">(current)</span></a>
@@ -20,13 +22,14 @@
                             </div>
                         </nav>
 
-                        <div class="container" style="background-image: url('fondoGeneral.jpg')">
-                            <p>Bienvenido,<span th:text="${id}"> </span>  </p>
+                        <div class="container" style="background-image: url('calle.jpg')">
+                            <p style="color:antiquewhite">Bienvenido,<span th:text="${id}"> </span>  </p>
                         </div>
 
-                        <div class="container" style="background-image: url('fondo.jpg')">
+                        <div class="container" style="background-image: url('calle.jpg')">
                             <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
-                            <table id="puestos" class="table table-inverse table-responsive">
+                           <div style="background-image: url('calle.jpg')">
+                            <table style="background-image: url('puesto2.jpg')" id="puestos" class="table table-inverse table-responsive">
                                 <thead class="thead-inverse">
                                     <tbody>
                                         <tr>
@@ -44,7 +47,7 @@
 
                                     </tbody>
                             </table>
-
+                        </div>
                         </div>
 
                         <style>
@@ -97,6 +100,13 @@
                                 -webkit-transform: translateX(26px);
                                 -ms-transform: translateX(26px);
                                 transform: translateX(26px);
+                            }
+
+                            .table td, .table th {
+                          /* padding: .75rem; */
+                               padding-top: 20px;
+                               padding-left: 65px;
+                              padding-right: 60px;
                             }
                         </style>
                         <!-- Optional JavaScript -->
