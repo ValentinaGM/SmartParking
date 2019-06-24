@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,6 +31,9 @@ import javax.validation.constraints.Size;
 @Table(name = "usuario")
 public class Usuario extends UsuarioBase implements Serializable {
 
+    @JoinColumn(name = "Estacionamientoid", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Estacionamiento estacionamientoid;
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
@@ -73,4 +78,11 @@ public class Usuario extends UsuarioBase implements Serializable {
         this.email = email;
     }
 
+    public Estacionamiento getEstacionamientoid() {
+        return estacionamientoid;
+    }
+
+    public void setEstacionamientoid(Estacionamiento estacionamientoid) {
+        this.estacionamientoid = estacionamientoid;
+    }
 }

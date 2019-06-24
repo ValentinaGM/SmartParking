@@ -16,15 +16,18 @@ import com.lp2.SmartParking.modelo.UsuarioBase;
 import com.lp2.SmartParking.modelo.Vehiculo;
 import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 /**
  *
@@ -42,7 +45,6 @@ public class UsuarioController {
     @Autowired
     private VehiculoDAO vDAO;
 
-
     @GetMapping("/login")
     public String usuario(Model model) {
 
@@ -53,25 +55,27 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public String loginForm(@ModelAttribute UsuarioBase usuario, Model model, HttpServletResponse response) throws IOException {
+    public String loginForm(@ModelAttribute UsuarioBase usuario, Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {
         model.addAttribute("invalido", false);
         String r = usuario.getRut();
         String p = usuario.getContraseña();
         UsuarioBase ubd = ubDAO.findByRut(r);
-        String vista = "";
-        if (ubd != null) {
+
+        if (ubd != null && ubd.getContraseña().equals(p)) {
+            HttpSession sesion = request.getSession();
             if (ubd instanceof Usuario) {
                 response.sendRedirect("vistaUsuario");
-                model.addAttribute("id", ubd.getId() );
+                sesion.setAttribute("usuario", ubd);
             } else if (ubd instanceof Guardia) {
                 response.sendRedirect("vistaGuardia");
+                sesion.setAttribute("usuario", ubd);
             }
         } else {
             model.addAttribute("error", true);
             return "login";
-            
+
         }
-            return null;
+        return null;
     }
 
     @GetMapping("/registrar")
@@ -87,21 +91,19 @@ public class UsuarioController {
         uDAO.save(usuario);
         return "registrar";
     }
-    
-    @PostMapping("/registrarVehiculo")
-    public String vehiculoForm(@ModelAttribute Vehiculo vehiculo) {
-        
-        vDAO.save(vehiculo);
-        return "registrar";
-    }
 
-    @GetMapping("/vistaUsuario")    
+@PostMapping("/registrarVehiculo")      
+    public void vehiculoForm(@RequestBody Vehiculo vehiculo, HttpServletResponse response) throws IOException {         
+        vDAO.save(vehiculo);        
+        
+    }
+    
+
+    @GetMapping("/vistaUsuario")
     public String page(Model model) {
         List<Puesto> puestos = pDAO.findAll();
-        System.out.println(puestos.get(0));
-        model.addAttribute("puestosBD", puestos);   
+        model.addAttribute("puestosBD", puestos);
         return "vistaUsuario";
-    }    
-    
+    }
 
 }

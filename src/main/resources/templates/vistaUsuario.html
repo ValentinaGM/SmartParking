@@ -21,19 +21,53 @@
                                 <a class="nav-item nav-link" th:href="@{/login}">Salir</a>
                             </div>
                         </nav>
-
+                        <!-- Modal -->
+                        <div class="modal fade" id="registrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Registrar vehiculo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                                                     
+                                    <div class="form-group">
+                                        <label for="patente">Patente</label>
+                                        <input type="text" id="patente" name="patente" class="form-control">              
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="marca">Marca</label>
+                                        <input type="marca" id="marca" name="marca" class="form-control" >          
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="modelo">Modelo</label>
+                                        <input type="modelo" id="modelo" name="modelo" class="form-control" >             
+                                    </div>  
+                                    <div class="form-group text-center">
+                                        <button type="button" class="btn btn-primary" onclick="registrarVehiculo()">Registrar</button>                                        
+                                    </div>
+                                    <input type="hidden" id="usuarioid" name="usuarioid" class="form-control" th:value="${usuario.id}">
+                                    <input type="hidden" id="ticketid" name="ticketid" class="form-control" value="1">
+                                
+                              </div>                             
+                            </div>
+                          </div>
+                        </div>
                         <div class="container" style="background-image: url('calle.jpg')">
-                            <p style="color:antiquewhite">Bienvenido,<span th:text="${id}"> </span>  </p>
+                            <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"> </span>  </p>
                         </div>
 
                         <div class="container" style="background-image: url('calle.jpg')">
                             <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#registrarModal"> Registrar Vehiculo </button>
                            <div style="background-image: url('calle.jpg')">
-                            <table style="background-image: url('puesto2.jpg')" id="puestos" class="table table-inverse table-responsive">
+                            <table class="table table-inverse table-responsive">
                                 <thead class="thead-inverse">
                                     <tbody>
                                         <tr>
-                                            <td th:each="p : ${puestosBD}">
+                                            <td style="background-image: url('puesto2.jpg')" th:each="p : ${puestosBD}">
                                                 <label th:if="${!p.estado}" class="switch disabled">
                                                     <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
                                                         <span class="slider" ></span>
@@ -129,10 +163,18 @@
                         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                         <script type="text/javascript">
 
-                                                        function actualizar() {
-                                                            location.reload();
-                                                        }
-
+                            function actualizar() {
+                                location.reload();
+                            }              
+                                                       
+                           function registrarVehiculo() {
+                               var patente = document.getElementById("patente").value;
+                               var marca = document.getElementById("marca").value;
+                               var modelo = document.getElementById("modelo").value;
+                               var usuarioid = document.getElementById("usuarioid").value;
+                               var ticketid = document.getElementById("ticketid").value;
+                               axios.post("registrarVehiculo", {patente: patente, marca: marca, modelo: modelo, usuarioid: usuarioid, ticketid: ticketid});
+                           }
 
                         </script>
 
