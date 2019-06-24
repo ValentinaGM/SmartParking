@@ -105,5 +105,24 @@ public class UsuarioController {
         model.addAttribute("puestosBD", puestos);
         return "vistaUsuario";
     }
+    @ModelAttribute("usuario")
+    public UsuarioBase getUsuario(HttpServletRequest request) {
+        // Obtener la sesion
+        HttpSession sesion = request.getSession(false);
+       
+        // Si hay sesion
+        if (sesion != null) {
+            // Obtener objeto de usuario
+            Object objeto = sesion.getAttribute("usuario");
+ 
+            // Si el objeto es de tipo UsuarioBase
+            if (objeto instanceof UsuarioBase) {
+                return (UsuarioBase) objeto;
+            }
+        }
+ 
+        // No hay objeto, retornar null
+        return null;
+    }
 
 }
