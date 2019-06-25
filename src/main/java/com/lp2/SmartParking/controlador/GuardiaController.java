@@ -29,31 +29,36 @@ public class GuardiaController {
     @Autowired
     private PuestoDAO pDAO;
 
+  //este metodo lleva a la vistaguardia, funciona de la misma forma que el de vistausuario
     @GetMapping("/vistaGuardia")
     public String page(Model model) {
+        //se obtienen los puestos
         List<Puesto> puestos = pDAO.findAll();
+        //esto solo imprime en la consola (no es necesario, sólo para probar que se estaban devolviendo de la bd)
         System.out.println(puestos.get(0));
+        //se envian al model de la vista
         model.addAttribute("puestosBD", puestos); 
         return "vistaGuardia";
     }
-
+    //este hay que borrarlo, no se esta usando JIJIJ
     @PostMapping("/cambiarEstado")
     public String cambiarEstado(Model model) {
 
         return "vistaGuardia";
     }
-
+    //este metodo cambia el valor del estado de un puesto, se llama cada vez que se clickea un checkbox y se le pasa el id del checkbox que corresponde al puesto
     @PostMapping("asignarpuesto/{id}")
     @ResponseBody
-    public void asignar(@PathVariable("id") int idPuesto) {        
-        Puesto p = pDAO.findById(idPuesto); 
+    public void asignar(@PathVariable("id") int idPuesto) { 
+        //primero busca el puesto por el id
+        Puesto p = pDAO.findById(idPuesto);
+        //si el estado es true(ocupado) se cambia a false (desocupado) y viceversa
         if (p.isEstado()) {
             p.setEstado(false);
         } else { 
             p.setEstado(true);
         }
-        
+        //guarda el puesto con el estado cambiado
         pDAO.save(p);     
     }
-
 }

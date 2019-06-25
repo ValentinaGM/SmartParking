@@ -7,9 +7,9 @@
         <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-                
-            <!-- Bootstrap CSS -->
-            
+
+                <!-- Bootstrap CSS -->
+
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
                     </head>
@@ -17,168 +17,172 @@
                     <body style="background-image: url('calle.jpg')">
                         <nav class="navbar navbar-expand navbar-light bg-light">
                             <div class="nav navbar-nav">
-                                <a class="nav-item nav-link active" href="#">SmartPark UFRO <span class="sr-only">(current)</span></a>
+                                <a class="nav-item nav-link active" href="#">SmartParking UFRO <span class="sr-only">(current)</span></a>
                                 <a class="nav-item nav-link" th:href="@{/login}">Salir</a>
                             </div>
                         </nav>
                         <!-- Modal -->
                         <div class="modal fade" id="registrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Registrar vehiculo</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                                                     
-                                    <div class="form-group">
-                                        <label for="patente">Patente</label>
-                                        <input type="text" id="patente" name="patente" class="form-control">              
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Registrar vehiculo</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="marca">Marca</label>
-                                        <input type="marca" id="marca" name="marca" class="form-control" >          
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="modelo">Modelo</label>
-                                        <input type="modelo" id="modelo" name="modelo" class="form-control" >             
-                                    </div>  
-                                    <div class="form-group text-center">
-                                        <button type="button" class="btn btn-primary" onclick="registrarVehiculo()">Registrar</button>                                        
-                                    </div>
-                                    <input type="hidden" id="usuarioid" name="usuarioid" class="form-control" th:value="${usuario.id}">
-                                    <input type="hidden" id="ticketid" name="ticketid" class="form-control" value="1">
-                                
-                              </div>                             
-                            </div>
-                          </div>
-                        </div>
-                        <div class="container" style="background-image: url('calle.jpg')">
-                            <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"> </span>  </p>
-                        </div>
+                                    <div class="modal-body">
 
-                        <div class="container" style="background-image: url('calle.jpg')">
-                            <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#registrarModal"> Registrar Vehiculo </button>
-                           <div style="background-image: url('calle.jpg')">
-                            <table class="table table-inverse table-responsive">
-                                <thead class="thead-inverse">
-                                    <tbody>
-                                        <tr>
-                                            <td style="background-image: url('puesto2.jpg')" th:each="p : ${puestosBD}">
-                                                <label th:if="${!p.estado}" class="switch disabled">
-                                                    <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
-                                                        <span class="slider" ></span>
-                                                </label>
-                                                <label th:if="${p.estado}" class="switch disabled">
-                                                    <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
-                                                        <span class="slider" ></span> 
-                                                </label>
-                                            </td>                    
-                                        </tr>
+                                        <div class="form-group">
+                                            <label for="patente">Patente</label>
+                                            <input type="text" id="patente" name="patente" class="form-control">              
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="marca">Marca</label>
+                                            <input type ="text" id="marca" name="marca" class="form-control" >          
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="modelo">Modelo</label>
+                                            <input type ="text" id="modelo" name="modelo" class="form-control" >             
+                                        </div>  
+                                        <div class="form-group text-center">
+                                            <button type="button" class="btn btn-primary" onclick="registrarVehiculo()">Registrar</button>                                        
+                                        </div>
+                                        <input type="hidden" id="usuarioid" name="usuarioid" class="form-control" th:value="${usuario.id}">
+                                            <input type="hidden" id="ticketid" name="ticketid" class="form-control" value="1">
 
-                                    </tbody>
-                            </table>
-                        </div>
-                        </div>
+                                                </div>                             
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <div class="container" style="background-image: url('calle.jpg')">
+                                                    <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"> </span>  </p>
+                                                </div>
 
-                        <style>
-                            .switch {
-                                position: relative;
-                                display: inline-block;
-                                width: 60px;
-                                height: 34px;
-                            }
+                                                <div class="container" style="background-image: url('calle.jpg')">
+                                                    <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#registrarModal"> Registrar Vehiculo </button>
+                                                    <div style="background-image: url('calle.jpg')">
+                                                        <table class="table table-inverse table-responsive">
+                                                            <thead class="thead-inverse">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="background-image: url('puesto2.jpg')" th:each="p : ${puestosBD}">
+                                                                            <label th:if="${!p.estado}" class="switch disabled">
+                                                                                <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
+                                                                                    <span class="slider" ></span>
+                                                                            </label>
+                                                                            <label th:if="${p.estado}" class="switch disabled">
+                                                                                <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
+                                                                                    <span class="slider" ></span> 
+                                                                                    <img class="img-fluid overflow-hidden mt-4" src="auto.png" width="100">
+                                                                                        </label>
+                                                                                        </td>                    
+                                                                                        </tr>
 
-                            .switch input {
-                                opacity: 0;
-                                width: 0;
-                                height: 0;
-                            }
+                                                                                        </tbody>
+                                                                                        </table>
+                                                                                        </div>
+                                                                                        </div>
 
-                            .slider {
-                                position: absolute;
-                                cursor: no-drop;
-                                top: 0;
-                                left: 0;
-                                right: 0;
-                                bottom: 0;
-                                background-color: green;
-                                -webkit-transition: .4s;
-                                transition: .4s;
-                            }
+                                                                                        <style>
+                                                                                            .switch {
+                                                                                                position: relative;
+                                                                                                display: inline-block;
+                                                                                                width: 60px;
+                                                                                                height: 34px;
+                                                                                            }
 
-                            .slider:before {
-                                position: absolute;
-                                content: "";
-                                height: 26px;
-                                width: 26px;
-                                left: 4px;
-                                bottom: 4px;
-                                background-color: white;
-                                -webkit-transition: .4s;
-                                transition: .4s;
-                            }
+                                                                                            .switch input {
+                                                                                                opacity: 0;
+                                                                                                width: 0;
+                                                                                                height: 0;
+                                                                                            }
 
-                            input:checked+.slider {
-                                background-color: red;
-                            }
+                                                                                            .slider {
+                                                                                                position: absolute;
+                                                                                                cursor: no-drop;
+                                                                                                top: 0;
+                                                                                                left: 0;
+                                                                                                right: 0;
+                                                                                                bottom: 0;
+                                                                                                background-color: green;
+                                                                                                -webkit-transition: .4s;
+                                                                                                transition: .4s;
+                                                                                            }
 
-                            input:focus+.slider {
-                                box-shadow: 0 0 1px #2196F3;
-                            }
+                                                                                            .slider:before {
+                                                                                                position: absolute;
+                                                                                                content: "";
+                                                                                                height: 26px;
+                                                                                                width: 26px;
+                                                                                                left: 4px;
+                                                                                                bottom: 4px;
+                                                                                                background-color: white;
+                                                                                                -webkit-transition: .4s;
+                                                                                                transition: .4s;
+                                                                                            }
 
-                            input:checked+.slider:before {
-                                -webkit-transform: translateX(26px);
-                                -ms-transform: translateX(26px);
-                                transform: translateX(26px);
-                            }
+                                                                                            input:checked+.slider {
+                                                                                                background-color: red;
+                                                                                            }
 
-                            .table td, .table th {
-                          /* padding: .75rem; */
-                               padding-top: 20px;
-                               padding-left: 65px;
-                              padding-right: 60px;
-                              height: 200px;
-                            }
-                              .table-responsive {
-                                display: block;
-                                 width: 101%;
-                                 height: 253px;
-                              }
-                            
-                        </style>
-                        <!-- Optional JavaScript -->
-                        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                        crossorigin="anonymous"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-                                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-                        crossorigin="anonymous"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-                                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-                        crossorigin="anonymous"></script>
-                        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                        <script type="text/javascript">
+                                                                                            input:focus+.slider {
+                                                                                                box-shadow: 0 0 1px #2196F3;
+                                                                                            }
 
-                            function actualizar() {
-                                location.reload();
-                            }              
-                                                       
-                           function registrarVehiculo() {
-                               var patente = document.getElementById("patente").value;
-                               var marca = document.getElementById("marca").value;
-                               var modelo = document.getElementById("modelo").value;
-                               var usuarioid = document.getElementById("usuarioid").value;
-                               var ticketid = document.getElementById("ticketid").value;
-                               axios.post("registrarVehiculo", {patente: patente, marca: marca, modelo: modelo, usuarioid: usuarioid, ticketid: ticketid});
-                           }
+                                                                                            input:checked+.slider:before {
+                                                                                                -webkit-transform: translateX(26px);
+                                                                                                -ms-transform: translateX(26px);
+                                                                                                transform: translateX(26px);
+                                                                                            }
 
-                        </script>
+                                                                                            .table td, .table th {
+                                                                                                /* padding: .75rem; */
+                                                                                                padding-top: 20px;
+                                                                                                padding-left: 65px;
+                                                                                                padding-right: 60px;
+                                                                                                height: 200px;
+                                                                                            }
+                                                                                            .table td {
+                                                                                                height: 200px;
+                                                                                            }
+                                                                                            .table-responsive {
+                                                                                                display: block;
+                                                                                                width: 101%;
+                                                                                                height: 253px;
+                                                                                            }
 
-                    </body>
+                                                                                        </style>
+                                                                                        <!-- Optional JavaScript -->
+                                                                                        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                                                                                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                                                                                                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                                                                                        crossorigin="anonymous"></script>
+                                                                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                                                                                                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                                                                                        crossorigin="anonymous"></script>
+                                                                                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                                                                                                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                                                                                        crossorigin="anonymous"></script>
+                                                                                        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                                                                                        <script type="text/javascript">
 
-                    </html>
+                                                                                    function actualizar() {
+                                                                                        location.reload();
+                                                                                    }
+
+                                                                                    function registrarVehiculo() {
+                                                                                        var patente = document.getElementById("patente").value;
+                                                                                        var marca = document.getElementById("marca").value;
+                                                                                        var modelo = document.getElementById("modelo").value;
+                                                                                        var usuarioid = document.getElementById("usuarioid").value;
+                                                                                        var ticketid = document.getElementById("ticketid").value;
+                                                                                        axios.post("registrarVehiculo", {patente: patente, marca: marca, modelo: modelo, usuarioid: usuarioid, ticketid: ticketid});
+                                                                                    }
+
+                                                                                        </script>
+
+                                                                                        </body>
+
+                                                                                        </html>
