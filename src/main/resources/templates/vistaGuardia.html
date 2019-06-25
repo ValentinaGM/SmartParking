@@ -26,26 +26,19 @@
 
     <div class="container" style="background-image: url('calle.jpg')">
               
-        <table class="table table-inverse table-responsive table-striped">
+        <table class="table table-inverse table-responsive">
             <thead class="thead-inverse">
-                <tr>
-                    <th scope="col"># Lugar </th>
-                    <th scope="col">Estado </th>
-                   
-                </tr>
-            </thead>
             <tbody>
-                <!-- agregar el th:each para que genere filas con los datos de los puestos -->
-                <tr th:each="p : ${puestosBD}">
-                    <th scope="row" ><span th:text="${p.id}"></span></th>
-                    <td>
-                        <label th:if="${!p.estado}" class="switch">
+                <tr>
+                    <td style="background-image: url('puesto2.jpg')" th:each="p : ${puestosBD}">
+                        <label th:if="${!p.estado}" class="switch disabled">
                             <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)">
-                            <span class="slider" ></span>
+                            <span class="slider"></span>
                         </label>
-                        <label th:if="${p.estado}" class="switch">
+                        <label th:if="${p.estado}" class="switch disabled">
                             <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked>
-                            <span class="slider" ></span>
+                            <span class="slider"></span>
+                            
                         </label>
                     </td>
                 </tr>
@@ -114,6 +107,20 @@
         body{
             color: rgb(252, 252, 252); 
         }
+        .table td,
+        .table th {
+            /* padding: .75rem; */
+            padding-top: 20px;
+            padding-left: 65px;
+            padding-right: 60px;
+            height: 200px;
+        }
+
+
+        .table-responsive {
+            display: block;
+            width: 101%;
+            height: 253px;
     </style>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
