@@ -70,11 +70,11 @@
                 <div th:each="p : ${puestosBD}" class="col-2" style="padding: 0">
                     <div class="puesto container">
                         <div class="justify-content-center d-flex">
-                            <label th:if="${!p.estado}" class="switch disabled">
+                            <label th:if="${!p.estado}" class="switch disabled" style="margin-top:10%;">
                                 <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
                                 <span class="slider"></span>
                             </label>
-                            <label th:if="${p.estado}" class="switch disabled">
+                            <label th:if="${p.estado}" class="switch disabled" style="margin-top:10%;">
                                 <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
                                 <span class="slider"></span>
                             </label>
@@ -142,7 +142,7 @@
         }
 
         .puesto {
-            height: 200px;
+            height: 255px;
             background-image: url('puesto2.jpg');
         }
 
