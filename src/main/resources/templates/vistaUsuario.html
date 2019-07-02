@@ -65,25 +65,23 @@
         <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
         <button class="btn btn-primary" data-toggle="modal" data-target="#registrarModal"> Registrar Vehiculo </button>
         <div style="background-image: url('calle.jpg')">
-            <table class="table table-inverse table-responsive">
-                <thead class="thead-inverse">
-                <tbody>
-                    <tr>
-                        <td style="background-image: url('puesto2.jpg')" th:each="p : ${puestosBD}">
-                            <label th:if="${!p.estado}" class="switch disabled">
-                                <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
-                                <span class="slider"></span>
-                            </label>
-                            <label th:if="${p.estado}" class="switch disabled">
-                                <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
-                                <span class="slider"></span>
-                                <img class="img-fluid overflow-hidden mt-4" src="auto.png" width="100">
-                            </label>
-                        </td>
-                    </tr>
 
-                </tbody>
-            </table>
+            <div class="row">
+                <div th:each="p : ${puestosBD}" class="col-2">
+                    <div class="container" style="background-image: url('puesto2.jpg')">
+                        <label th:if="${!p.estado}" class="switch disabled">
+                            <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
+                            <span class="slider"></span>
+                        </label>
+                        <label th:if="${p.estado}" class="switch disabled">
+                            <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
+                            <span class="slider"></span>
+                            <img class="img-fluid overflow-hidden mt-4" src="auto.png" width="100">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -139,12 +137,11 @@
             transform: translateX(26px);
         }
 
-        .table td,
-        .table th {
+        .puesto {
             /* padding: .75rem; */
             padding-top: 20px;
             padding-left: 65px;
-            padding-right: 60px;
+            padding-right: 65px;
             height: 200px;
         }
 
