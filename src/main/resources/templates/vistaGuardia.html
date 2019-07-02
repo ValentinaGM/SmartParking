@@ -21,7 +21,7 @@
     </nav>
 
     <div class="container" style="background-image: url('calle.jpg')">
-        <p>Bienvenido, <span th:text="${id}"> </span> </p>
+        <p>Bienvenido, <span th:text="${usuario.nombre}"> </span> </p>
     </div>
 
     <div class="container" style="background-image: url('calle.jpg')">
@@ -32,11 +32,11 @@
                 <tr>
                     <td style="background-image: url('puesto2.jpg')" th:each="p : ${puestosBD}">
                         <label th:if="${!p.estado}" class="switch disabled">
-                            <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)">
+                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal(${p.id})">
                             <span class="slider"></span>
                         </label>
                         <label th:if="${p.estado}" class="switch disabled">
-                            <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked>
+                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal(${p.id})" checked>
                             <span class="slider"></span>
                             
                         </label>
@@ -47,7 +47,36 @@
         </table>
 
     </div>
+<!-- Modal -->
+        <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ingresar ticket</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="form-group">
+                            <label for="patente">Patente</label>
+                            <input type="text" id="patente" name="patente" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="inicio">Hora inicio</label>
+                            <input type="time" id="inicio" name="inicio" class="form-control">
+                        </div>
+                        
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-primary" onclick="">Ingresar</button>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
     <style>
         .switch {
             position: relative;
@@ -137,10 +166,22 @@
         crossorigin="anonymous"></script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script> 
+          var puesto;
+          
         function asignarPuesto(elemento){
           var id= elemento.id;
           axios.post("asignarpuesto/"+id);
         } 
+        
+        function abrirModal(id) {
+            puesto = id;
+            $('#ticketModal').modal('show');
+        }
+        
+        $('input[type="checkbox"]').click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		});
        </script>
 </body>
 

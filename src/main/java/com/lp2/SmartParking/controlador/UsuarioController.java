@@ -118,7 +118,7 @@ public class UsuarioController {
     @GetMapping("/registrar")
     public String usuarios(Model model) {
         //esto no tiene funcionalidad, se puede comentar jajaja
-        model.addAttribute("Usuario", new Usuario());
+       model.addAttribute("Usuario", new Usuario());
         return "registrar";
     }
     //este metodo lo usa el formulario de registro de usuarios
@@ -147,3 +147,4 @@ public class UsuarioController {
         return "vistaUsuario";
     }
 }
+//asociar puesto y vehiculo con un modal

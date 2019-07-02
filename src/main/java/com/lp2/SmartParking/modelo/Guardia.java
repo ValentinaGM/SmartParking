@@ -49,7 +49,7 @@ public class Guardia extends UsuarioBase implements Serializable {
     @Column(name = "telefono")
     private Integer telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "guardiaid", fetch = FetchType.LAZY)
-    private List<Turnos> turnosList;
+    private List<Turnos> turnosList; 
 
     public Guardia() {
     }

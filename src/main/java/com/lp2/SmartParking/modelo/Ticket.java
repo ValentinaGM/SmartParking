@@ -38,6 +38,9 @@ public class Ticket implements Serializable {
     @JoinColumn(name = "Estacionamientoid", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estacionamiento estacionamientoid;
+    @JoinColumn(name = "Vehiculoid", referencedColumnName = "id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private Vehiculo vehiculoid;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -136,5 +139,13 @@ public class Ticket implements Serializable {
     public void setEstacionamientoid(Estacionamiento estacionamientoid) {
         this.estacionamientoid = estacionamientoid;
     }
-    
+
+    public Vehiculo getVehiculoid() {
+        return vehiculoid;
+    }
+
+    public void setVehiculoid(Vehiculo vehiculoid) {
+        this.vehiculoid = vehiculoid;
+    }
+
 }
