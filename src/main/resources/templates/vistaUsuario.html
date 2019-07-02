@@ -67,17 +67,21 @@
         <div style="background-image: url('calle.jpg')">
 
             <div class="row">
-                <div th:each="p : ${puestosBD}" class="col-2">
-                    <div class="container" style="background-image: url('puesto2.jpg')">
-                        <label th:if="${!p.estado}" class="switch disabled">
-                            <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
-                            <span class="slider"></span>
-                        </label>
-                        <label th:if="${p.estado}" class="switch disabled">
-                            <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
-                            <span class="slider"></span>
-                            <img class="img-fluid overflow-hidden mt-4" src="auto.png" width="100">
-                        </label>
+                <div th:each="p : ${puestosBD}" class="col-2" style="padding: 0">
+                    <div class="puesto container">
+                        <div class="justify-content-center d-flex">
+                            <label th:if="${!p.estado}" class="switch disabled">
+                                <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" disabled>
+                                <span class="slider"></span>
+                            </label>
+                            <label th:if="${p.estado}" class="switch disabled">
+                                <input type="checkbox" th:id="${p.id}" onchange="asignarPuesto(this)" checked disabled>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="justify-content-center d-flex">
+                            <img th:if="${p.estado}" class="img-fluid overflow-hidden mt-4 " src="auto.png" width="100">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,15 +142,8 @@
         }
 
         .puesto {
-            /* padding: .75rem; */
-            padding-top: 20px;
-            padding-left: 65px;
-            padding-right: 65px;
             height: 200px;
-        }
-
-        .table td {
-            height: 200px;
+            background-image: url('puesto2.jpg');
         }
 
         .table-responsive {
