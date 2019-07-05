@@ -26,25 +26,25 @@
 
     <div class="container" style="background-image: url('calle.jpg')">
               
-        <table class="table table-inverse table-responsive">
-            <thead class="thead-inverse">
-            <tbody>
-                <tr>
-                    <td style="background-image: url('puesto2.jpg')" th:each="p : ${puestosBD}">
-                        <label th:if="${!p.estado}" class="switch disabled">
-                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal(${p.id})">
+        <div class="row">
+            <div th:each="p : ${puestosBD}"  class="col-2" style="padding: 0">
+                <div class="puesto container">
+                    <div class="justify-content-center d-flex">
+                        <label th:if="${!p.estado}" class="switch disabled" style="margin-top:5%;">
+                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal(this)" >
                             <span class="slider"></span>
                         </label>
-                        <label th:if="${p.estado}" class="switch disabled">
-                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal(${p.id})" checked>
+                        <label th:if="${p.estado}" class="switch disabled " style="margin-top:5%;">
+                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal(this)" checked>
                             <span class="slider"></span>
-                            
                         </label>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
+                    </div>
+                    <div class="justify-content-center d-flex">
+                        <img th:if="${p.estado}" class="img-fluid overflow-hidden mt-4 " src="auto.png" width="100" height="150px">
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 <!-- Modal -->
@@ -59,7 +59,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
+                                                id puesto
+                        <input type="text"  id="idPuesto" name="idPuesto" class="form-control ">
                         <div class="form-group">
                             <label for="patente">Patente</label>
                             <input type="text" id="patente" name="patente" class="form-control">
@@ -72,6 +73,7 @@
                         <div class="form-group text-center">
                             <button type="button" class="btn btn-primary" onclick="">Ingresar</button>
                         </div>
+
                       
                     </div>
                 </div>
@@ -129,22 +131,13 @@
             transform: translateX(26px);
         }
 
-        .table{
-            color: rgb(252, 252, 252);
-        }
-
         body{
             color: rgb(252, 252, 252); 
         }
-        .table td,
-        .table th {
-            /* padding: .75rem; */
-            padding-top: 20px;
-            padding-left: 65px;
-            padding-right: 60px;
-            height: 200px;
+        .puesto {
+            height: 255px;
+            background-image: url('puesto2.jpg');
         }
-
 
         .table-responsive {
             display: block;
@@ -173,8 +166,10 @@
           axios.post("asignarpuesto/"+id);
         } 
         
-        function abrirModal(id) {
-            puesto = id;
+        function abrirModal(elemento) {
+            //alert(elemento.id)
+            puesto = elemento.id;
+            $('idPuesto').value=puesto;
             $('#ticketModal').modal('show');
         }
         
