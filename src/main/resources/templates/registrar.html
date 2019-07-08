@@ -15,10 +15,11 @@
 
                         <div class="container"> 
                         <div class="oli">      
-                                <h1 class="text-white" style="padding-left: 150px"> Registrarse </h1> 
-                            <div class="col-md-4 offset-md-4">  
+                            <h1 class="text-white" style="padding-left: 150px"> Registrarse </h1> 
+                            <div class="col-md-4 " style="margin-left:100px">  
                                 
                                 <form th:action="@{/registrar}" th:object="${usuario}" method="post">
+                                   <div class="formulario" style="width: 200%;">
                                     <div class="form-group">
                                         <label for="rut">Rut</label>
                                         <input type="text" th:field="*{rut}" placeholder="Ej: 18302504-4" class="form-control">              
@@ -35,7 +36,7 @@
                                         <label for="contraseña">Contraseña</label>
                                         <input type="password" th:field="*{contraseña}" class="form-control" >
                                     </div>
-                                    
+                                </div>  
                                     <!-- <form th:action="@{/registrarVehiculo}" th:object="${vehiculo}" method="post">
                                         <div class="form-group">
                                             <label for="patente">Patente</label>
@@ -53,7 +54,7 @@
                                     </form> -->
                                     <div class="form-group text-center">
                                         <button id="buton" type="submit" class="btn btn-primary" >Registrar</button>
-                                        <button class="btn btn-danger" type="button" onclick="volver()">Volver a inicio</button>
+                                        <button id="buto" class="btn btn-danger" type="button" onclick="volver()">Volver a inicio</button>
                                     </div>
                                 </form>
                             </div>

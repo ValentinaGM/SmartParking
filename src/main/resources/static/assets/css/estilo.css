@@ -1,5 +1,5 @@
 .container{
-    padding-top: 10%;
+    padding-top: 5%;
     padding-left: 40%;
     padding-right: 40%;
 }
@@ -9,6 +9,13 @@
     color: aliceblue;
     margin-right: 300px;
     margin-left:300px;
+}
+#buton{
+    margin-left: 90px;
+}
+#buto{
+    margin-left: 71px;
+    margin-top: 4px;
 }
 
 
