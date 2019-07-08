@@ -19,5 +19,6 @@ public interface UsuarioDAO extends CrudRepository<Usuario, Integer> {
     public List<Usuario> findAll(); 
     
     public Usuario findByRut (String rut);
+    public Usuario findById (int id);
     
 }

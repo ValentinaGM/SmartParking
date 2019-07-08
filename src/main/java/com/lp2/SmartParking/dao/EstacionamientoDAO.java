@@ -13,5 +13,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Valentinasdftgyhusedfghj
  */
 public interface EstacionamientoDAO extends CrudRepository<Estacionamiento, Integer> {
-    
+    public Estacionamiento findById (int id);
 }

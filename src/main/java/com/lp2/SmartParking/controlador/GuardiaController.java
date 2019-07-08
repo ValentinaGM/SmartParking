@@ -7,7 +7,9 @@ package com.lp2.SmartParking.controlador;
 
 import com.lp2.SmartParking.dao.GuardiaDAO;
 import com.lp2.SmartParking.dao.PuestoDAO;
+import com.lp2.SmartParking.modelo.Guardia;
 import com.lp2.SmartParking.modelo.Puesto;
+import com.lp2.SmartParking.modelo.Usuario;
 import com.lp2.SmartParking.modelo.UsuarioBase;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -33,23 +35,33 @@ public class GuardiaController {
     @Autowired
     private PuestoDAO pDAO;
 
-  //este metodo lleva a la vistaguardia, funciona de la misma forma que el de vistausuario
+ //este metodo lleva a la vistaguardia, funciona de la misma forma que el de vistausuario
     @GetMapping("/vistaGuardia")
-    public String page(Model model) {
-        //se obtienen los puestos
-        List<Puesto> puestos = pDAO.findAll();
-        //esto solo imprime en la consola (no es necesario, sólo para probar que se estaban devolviendo de la bd)
-        System.out.println(puestos.get(0));
-        //se envian al model de la vista
-        model.addAttribute("puestosBD", puestos); 
-        return "vistaGuardia";
+    public String page(Model model, HttpServletRequest request) {
+        
+        // Obtener la sesion
+        HttpSession sesion = request.getSession(false);
+       
+        // Si hay sesion
+        if (sesion != null) {
+            // Obtener objeto de usuario
+            Object usuario = sesion.getAttribute("usuarioLogueado");
+            // Si el objeto es de tipo UsuarioBase
+            if (usuario instanceof Guardia) {
+                model.addAttribute("usuario", usuario);
+                //se obtiene la lista de todos los puestos de estacionamiento de la bd
+                List<Puesto> puestos = pDAO.findAll();      
+                //se agrega la lista al model para poder ser leido en la vista con el "th:each" de la tabla
+                model.addAttribute("puestosBD", puestos);                
+                return "vistaGuardia";
+            } else if (usuario instanceof Usuario) {
+                return "redirect:/vistaUsuario";
+            }
+        } 
+        // No hay objeto, retornar login
+        return "redirect:/login"; 
     }
-    //este hay que borrarlo, no se esta usando JIJIJ
-    @PostMapping("/cambiarEstado")
-    public String cambiarEstado(Model model) {
-
-        return "vistaGuardia";
-    }
+    
     //este metodo cambia el valor del estado de un puesto, se llama cada vez que se clickea un checkbox y se le pasa el id del checkbox que corresponde al puesto
     @PostMapping("asignarpuesto/{id}")
     @ResponseBody
@@ -64,24 +76,5 @@ public class GuardiaController {
         }
         //guarda el puesto con el estado cambiado
         pDAO.save(p);     
-    }
-    @ModelAttribute("usuario")
-    public UsuarioBase getUsuario(HttpServletRequest request) {
-        // Obtener la sesion
-        HttpSession sesion = request.getSession(false);
-       
-        // Si hay sesion
-        if (sesion != null) {
-            // Obtener objeto de usuario
-            Object objeto = sesion.getAttribute("usuario");
- 
-            // Si el objeto es de tipo UsuarioBase
-            if (objeto instanceof UsuarioBase) {
-                return (UsuarioBase) objeto;
-            }
-        }
- 
-        // No hay objeto, retornar null
-        return null;
     }
 }

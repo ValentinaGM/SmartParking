@@ -14,4 +14,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UsuarioBaseDAO extends CrudRepository<UsuarioBase, Integer> {
     public UsuarioBase findByRut (String rut); 
+    public UsuarioBase findById (int id); 
 }

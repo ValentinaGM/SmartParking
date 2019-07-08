@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/themes/default.min.css"/>
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/alertify.rtl.min.css"/>
 </head>
 <!-- la idea es con thymeleaf generar los tr y td de la tabla -->
 
@@ -19,7 +21,7 @@
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
             <a class="nav-item nav-link active" href="#">SmartParking UFRO <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" th:href="@{/login}">Salir</a>
+            <a class="nav-item nav-link" th:href="@{/logout}">Salir</a>
         </div>
     </nav>
     <!-- Modal -->
@@ -50,21 +52,20 @@
                     <div class="form-group text-center">
                         <button type="button" class="btn btn-primary" onclick="registrarVehiculo()">Registrar</button>
                     </div>
-                    <input type="hidden" id="usuarioid" name="usuarioid" class="form-control" th:value="${usuario.id}">
-                    <input type="hidden" id="ticketid" name="ticketid" class="form-control" value="1">
+                    <input type="hidden" id="usuarioid" name="usuarioid" class="form-control" th:value="${usuario.id}">                  
 
                 </div>
             </div>
         </div>
     </div>
-    <div class="container" style="background-image: url('calle.jpg')">
-        <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"> </span> </p>
+    <div class="container">
+        <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"></span> <span th:text="${usuario.id}"> </span> </p>
     </div>
 
-    <div class="container" style="background-image: url('calle.jpg')">
+    <div class="container" >
         <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
         <button class="btn btn-primary" data-toggle="modal" data-target="#registrarModal"> Registrar Vehiculo </button>
-        <div style="background-image: url('calle.jpg')">
+        <div>
 
             <div class="row">
                 <div th:each="p : ${puestosBD}" class="col-2" style="padding: 0">
@@ -148,7 +149,7 @@
 
         .table-responsive {
             display: block;
-            width: 101%;
+            width: 100%;
             height: 253px;
         }
     </style>
@@ -164,6 +165,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/alertify.min.js"></script>
     <script type="text/javascript">
 
         function actualizar() {
@@ -173,10 +175,15 @@
         function registrarVehiculo() {
             var patente = document.getElementById("patente").value;
             var marca = document.getElementById("marca").value;
-            var modelo = document.getElementById("modelo").value;
-            var usuarioid = document.getElementById("usuarioid").value;
-            var ticketid = document.getElementById("ticketid").value;
-            axios.post("registrarVehiculo", { patente: patente, marca: marca, modelo: modelo, usuarioid: usuarioid, ticketid: ticketid });
+            var modelo = document.getElementById("modelo").value;  
+            var usuarioid = document.getElementById("usuarioid").value;           
+            axios.post("registrarVehiculo/" + usuarioid, { patente: patente, marca: marca, modelo: modelo});
+            alertify.set('notifier','position','top-center');
+            alertify.success('Vehiculo registrado');
+            $('#registrarModal').modal('hide');
+            document.getElementById("patente").value = "";
+            document.getElementById("marca").value = "";
+            document.getElementById("modelo").value = "";
         }
 
     </script>
