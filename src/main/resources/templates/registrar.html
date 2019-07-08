@@ -14,15 +14,10 @@
 
 
                         <div class="container"> 
-                        <div class="oli" style="
-                           background: #00030645;
-                           color: aliceblue;
-                           padding-right: 30px;
-                            padding-left: 30px;
-                            padding-bottom: 10px;
-                            padding-top: 10px;">       
+                        <div class="oli">      
+                                <h1 class="text-white" style="padding-left: 150px"> Registrarse </h1> 
                             <div class="col-md-4 offset-md-4">  
-                                <h1 class="text-white"> Registrarse </h1>
+                                
                                 <form th:action="@{/registrar}" th:object="${usuario}" method="post">
                                     <div class="form-group">
                                         <label for="rut">Rut</label>
