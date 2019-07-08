@@ -12,8 +12,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/themes/default.min.css"/>
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/alertify.rtl.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/themes/default.css"/>
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/alertify.css"/>
 </head>
 <!-- la idea es con thymeleaf generar los tr y td de la tabla -->
 
@@ -58,6 +58,8 @@
             </div>
         </div>
     </div>
+    
+    
     <div class="container">
         <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"></span> <span th:text="${usuario.id}"> </span> </p>
     </div>
@@ -89,7 +91,7 @@
 
         </div>
     </div>
-
+    
     <style>
         .switch {
             position: relative;
@@ -165,7 +167,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/alertify.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/alertify.js"></script>
     <script type="text/javascript">
 
         function actualizar() {
