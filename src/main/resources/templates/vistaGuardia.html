@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/themes/default.css"/>
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/alertify.css"/>
 </head>
 
 <body style="background-image: url('calle.jpg')">
@@ -20,11 +22,11 @@
         </div>
     </nav>
 
-    <div class="container" style="background-image: url('calle.jpg')">
-        <p>Bienvenido, <span th:text="${usuario.nombre}"> </span> </p>
+    <div class="container">
+        <p style="color:antiquewhite">Bienvenido, <span th:text="${usuario.nombre}"> </span> </p>
     </div>
 
-    <div class="container" style="background-image: url('calle.jpg')">
+    <div class="container">
               
         <div class="row">
             <div th:each="p : ${puestosBD}"  class="col-2" style="padding: 0">
@@ -35,7 +37,7 @@
                             <span class="slider"></span>
                         </label>
                         <label th:if="${p.estado}" class="switch disabled " style="margin-top:5%;">
-                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal(this)" checked>
+                            <input type="checkbox" th:id="${p.id}" th:onclick="abrirModal2(this)" checked>
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -47,23 +49,25 @@
         </div>
 
     </div>
-<!-- Modal -->
+    <!-- Modal -->
         <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content" style="color: rgb(0, 0, 0)">
+                <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ingresar ticket</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" >
+                    <div class="modal-body">
                                                 
                         <input type="hidden"  id="idPuesto" name="idPuesto" class="form-control ">
                         <div class="form-group">
                             <label for="patente">Patente</label>
-                            <input type="text" id="patente" name="patente" class="form-control">
+                            <select class="form-control" id="patente">
+                                <option th:each="v : ${vehiculosBD}"><span th:text="${v.patente}"></span></option>                            
+                            </select>                            
                         </div>
                         <div class="form-group">
                             <label for="inicio">Hora inicio</label>
@@ -71,10 +75,37 @@
                         </div>
                         
                         <div class="form-group text-center">
-                            <button type="button" class="btn btn-primary" onclick="">Ingresar</button>
+                            <button type="button" class="btn btn-primary" onclick="asignarPuesto()">Registrar</button>
                         </div>
 
                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal 2 -->
+        <div class="modal fade" id="ticketModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registrar salida</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                                                
+                        <input type="hidden"  id="idPuesto" name="idPuesto" class="form-control ">                       
+                        <div class="form-group">
+                            <label for="inicio">Hora salida</label>
+                            <input type="time" id="fin" name="fin" class="form-control">
+                        </div>
+                        
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-primary" onclick="desasignarPuesto()">Registrar</button>
+                        </div>                     
                     </div>
                 </div>
             </div>
@@ -129,11 +160,7 @@
             -webkit-transform: translateX(26px);
             -ms-transform: translateX(26px);
             transform: translateX(26px);
-        }
-
-        body{
-            color: rgb(252, 252, 252); 
-        }
+        }       
         .puesto {
             height: 255px;
             background-image: url('puesto2.jpg');
@@ -158,19 +185,58 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/alertify.js"></script>
       <script> 
-          var puesto;
           
-        function asignarPuesto(elemento){
-          var id= elemento.id;
-          axios.post("asignarpuesto/"+id);
+          
+        function asignarPuesto(){
+          var patente = document.getElementById("patente").value;
+          var inicio = document.getElementById("inicio").value;
+          var idPuesto= document.getElementById("idPuesto").value;
+          
+          if (patente !== "" && inicio !== "") {
+              axios.post("asignarpuesto/"+idPuesto+"/"+patente, {inicio: inicio});
+              alertify.set('notifier','position','top-center');
+              alertify.success('Puesto asignado');
+              $('#ticketModal').modal('hide');
+              document.getElementById("patente").value = "";
+              document.getElementById("inicio").value = "";
+              document.getElementById("idPuesto").value = "";
+              location.reload();
+          } else {
+              alertify.set('notifier','position','top-center');
+              alertify.error('Debe completar todos los datos');
+          }
+          
         } 
         
-        function abrirModal(elemento) {
-            //alert(elemento.id)
-            puesto = elemento.id;
-            $('idPuesto').value=puesto;
+        function desasignarPuesto(){
+          var fin = document.getElementById("fin").value;
+          var idPuesto= document.getElementById("idPuesto").value;
+                    
+          if (fin !== "") {
+              axios.post("desasignarpuesto/"+idPuesto,  {fin: fin});
+              alertify.set('notifier','position','top-center');
+              alertify.success('Puesto liberado');
+              $('#ticketModal2').modal('hide');
+              document.getElementById("fin").value = "";              
+              document.getElementById("idPuesto").value = "";
+              location.reload();
+          } else {
+              alertify.set('notifier','position','top-center');
+              alertify.error('Debe completar todos los datos');
+          }
+          
+        } 
+        
+        function abrirModal(elemento) {           
+            document.getElementById("idPuesto").value = elemento.id;            
             $('#ticketModal').modal('show');
+        }
+        
+        function abrirModal2(elemento) {           
+            document.getElementById("idPuesto").value = elemento.id;            
+            $('#ticketModal2').modal('show');
         }
         
         $('input[type="checkbox"]').click(function(e) {

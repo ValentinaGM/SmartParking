@@ -6,6 +6,7 @@
 package com.lp2.SmartParking.dao;
 
 import com.lp2.SmartParking.modelo.Ticket;
+import com.lp2.SmartParking.modelo.Vehiculo;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Valentina
  */
 public interface TicketDAO extends CrudRepository<Ticket, Integer> {
-    
+     public Ticket findByVehiculoid(Vehiculo vehiculoId);
 }

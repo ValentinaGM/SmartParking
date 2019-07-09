@@ -6,6 +6,7 @@
 package com.lp2.SmartParking.dao;
 
 import com.lp2.SmartParking.modelo.Vehiculo;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +14,10 @@ import org.springframework.data.repository.CrudRepository;
  * @author Valentina
  */
 public interface VehiculoDAO extends CrudRepository<Vehiculo, Integer> {
+    public Vehiculo findByPatente(String p);
     
+    public Vehiculo findById(int id);
+    
+    @Override
+    public List<Vehiculo> findAll();
 }

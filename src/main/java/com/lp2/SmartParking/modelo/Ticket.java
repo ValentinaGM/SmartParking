@@ -5,8 +5,9 @@
  */
 package com.lp2.SmartParking.modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,8 +23,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -48,15 +47,14 @@ public class Ticket implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "inicio")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date inicio;
-    @Column(name = "fin")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fin;
-    @Column(name = "tiempo_estacionado")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date tiempoEstacionado;
+    @Column(name = "inicio")    
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime inicio;
+    @Column(name = "fin")    
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime fin;
+    @Column(name = "tiempo_estacionado")    
+    private Long tiempoEstacionado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticketid", fetch = FetchType.LAZY)
     private List<Vehiculo> vehiculoList;
 
@@ -75,29 +73,31 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    public Date getInicio() {
+    public LocalTime getInicio() {
         return inicio;
     }
 
-    public void setInicio(Date inicio) {
+    public void setInicio(LocalTime inicio) {
         this.inicio = inicio;
     }
 
-    public Date getFin() {
+    public LocalTime getFin() {
         return fin;
     }
 
-    public void setFin(Date fin) {
+    public void setFin(LocalTime fin) {
         this.fin = fin;
     }
 
-    public Date getTiempoEstacionado() {
+    public Long getTiempoEstacionado() {
         return tiempoEstacionado;
     }
 
-    public void setTiempoEstacionado(Date tiempoEstacionado) {
+    public void setTiempoEstacionado(Long tiempoEstacionado) {
         this.tiempoEstacionado = tiempoEstacionado;
     }
+
+    
 
     public List<Vehiculo> getVehiculoList() {
         return vehiculoList;

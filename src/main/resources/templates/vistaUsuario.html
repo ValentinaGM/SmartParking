@@ -61,7 +61,7 @@
     
     
     <div class="container">
-        <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"></span>
+        <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"></span></p>
     </div>
 
     <div class="container" >
@@ -178,14 +178,19 @@
             var patente = document.getElementById("patente").value;
             var marca = document.getElementById("marca").value;
             var modelo = document.getElementById("modelo").value;  
-            var usuarioid = document.getElementById("usuarioid").value;           
-            axios.post("registrarVehiculo/" + usuarioid, { patente: patente, marca: marca, modelo: modelo});
-            alertify.set('notifier','position','top-center');
-            alertify.success('Vehiculo registrado');
-            $('#registrarModal').modal('hide');
-            document.getElementById("patente").value = "";
-            document.getElementById("marca").value = "";
-            document.getElementById("modelo").value = "";
+            var usuarioid = document.getElementById("usuarioid").value;    
+            if (patente !== "" && marca !== "" && modelo !== "") {
+                axios.post("registrarVehiculo/" + usuarioid, { patente: patente, marca: marca, modelo: modelo});
+                alertify.set('notifier','position','top-center');
+                alertify.success('Vehiculo registrado');
+                $('#registrarModal').modal('hide');
+                document.getElementById("patente").value = "";
+                document.getElementById("marca").value = "";
+                document.getElementById("modelo").value = "";                
+            } else {
+                alertify.set('notifier','position','top-center');
+                alertify.error('Debe completar todos los datos');
+            }
         }
 
     </script>
