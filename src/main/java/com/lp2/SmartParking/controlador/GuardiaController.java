@@ -6,7 +6,6 @@
 package com.lp2.SmartParking.controlador;
 
 import com.lp2.SmartParking.dao.EstacionamientoDAO;
-import com.lp2.SmartParking.dao.GuardiaDAO;
 import com.lp2.SmartParking.dao.PuestoDAO;
 import com.lp2.SmartParking.dao.TicketDAO;
 import com.lp2.SmartParking.dao.VehiculoDAO;
@@ -36,8 +35,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GuardiaController {
 
     @Autowired
-    private GuardiaDAO gDAO;
-    @Autowired
     private PuestoDAO pDAO;
     @Autowired
     private VehiculoDAO vDAO;
@@ -57,16 +54,20 @@ public class GuardiaController {
         if (sesion != null) {
             // Obtener objeto de usuario
             Object usuario = sesion.getAttribute("usuarioLogueado");
-            // Si el objeto es de tipo UsuarioBase
+            // Si el objeto es de tipo Guardia
             if (usuario instanceof Guardia) {
                 model.addAttribute("usuario", usuario);
                 //se obtiene la lista de todos los puestos de estacionamiento de la bd
-                List<Puesto> puestos = pDAO.findAll();   
+                List<Puesto> puestos = pDAO.findAll();  
+                //se obtiene la lista de todos los vehiculos registrados en la bd
                 List<Vehiculo> vehiculos = vDAO.findAll();   
-                //se agrega la lista al model para poder ser leido en la vista con el "th:each" de la tabla
+                //se agrega las listas al model de la vista
+                //los puestos son para crear cada espacio de estacionamiento
+                //los vehiculos se usan al momento de asignar un espacio a ocupado, para mostrar las patentes de los vehiculos registrados
                 model.addAttribute("puestosBD", puestos); 
                 model.addAttribute("vehiculosBD", vehiculos); 
                 return "vistaGuardia";
+            // Si el objeto es de tipo Usuario ir a vista usuario
             } else if (usuario instanceof Usuario) {
                 return "redirect:/vistaUsuario";
             }
@@ -75,42 +76,56 @@ public class GuardiaController {
         return "redirect:/login"; 
     }
     
-    //este metodo cambia el valor del estado de un puesto, se llama cada vez que se clickea un checkbox y se le pasa el id del checkbox que corresponde al puesto
+    //este metodo se usa por el boton del modal cuando se quiere cambiar un puesto a ocupado
     @PostMapping("asignarpuesto/{id}/{patente}")
+    //es ResponseBody porque no redirige a ninguna vista
     @ResponseBody
+    //se le entrega los datos del ticket (en este caso sólo con la hora de entrada), id puesto y la patente. Esto a traves del axios en el javascript
     public void asignar(@RequestBody Ticket t, @PathVariable("id") int idPuesto, @PathVariable("patente") String patente) { 
-        //primero busca el puesto por el id
+        //se busca el puesto por el id
         Puesto p = pDAO.findById(idPuesto);
+        //se busca el vehiculo por la patente
         Vehiculo v = vDAO.findByPatente(patente);
+        //se les asigna el estacionamiento de la UFRO al ticket, que es el único creado
         t.setEstacionamientoid(eDAO.findById(1)); 
+        //se le asigna el vehiculo al ticket
         t.setVehiculoid(v);        
-        //si el estado es true(ocupado) se cambia a false (desocupado) y viceversa        
-        p.setEstado(true);        
+        //se cambia el estado del puesto a true (ocupado)       
+        p.setEstado(true);   
+        //se le asigna el vehiculo al puesto
         p.setVehiculoid(v);
         //guarda el puesto con el estado cambiado
-        pDAO.save(p);    
-        tDAO.save(t); 
+        pDAO.save(p);   
+        //guarda el ticket creado
+        tDAO.save(t);
     }
-    
+    //este metodo se usa por el boton del modal cuando se quiere desocupar un puesto
     @PostMapping("desasignarpuesto/{id}")
     @ResponseBody
+    //se le entrega los datos del ticket (en este caso la hora de salida) y el id puesto. Esto a traves del axios en el javascript
     public void desasignar(@RequestBody Ticket tfin, @PathVariable("id") int idPuesto) { 
         //primero busca el puesto por el id
         Puesto p = pDAO.findById(idPuesto);      
-        
+        //se busca el ticket (con el id del vehiculo) que contiene la hora de inicio 
         Ticket t = tDAO.findByVehiculoid(p.getVehiculoid());    
-        
+        //se calcula el tiempo que estuvo estacionado
+        //para esto se usa la clase Duration que da la duracion entre 2 tiempos en minutos
         long tiempoEstacionado = Duration.between(t.getInicio(), tfin.getFin()).toMinutes();
+        //se le asigna la hora de salida o fin al ticket
         t.setFin(tfin.getFin());
+        //se asigna el tiempo estacionado al ticket
         t.setTiempoEstacionado(tiempoEstacionado);
+        //se asigna el estacionamiento de la UFRO al puesto y al ticket
         t.setEstacionamientoid(eDAO.findById(1));
         p.setEstacionamientoid(eDAO.findById(1));
+        //se borra el vehiculo del ticket y del puesto, ya que se fue
         t.setVehiculoid(null);
         p.setVehiculoid(null);
-        //si el estado es true(ocupado) se cambia a false (desocupado) y viceversa       
+        //se cambia el estado del puesto a false(desocupado)
         p.setEstado(false);        
         //guarda el puesto con el estado cambiado
         pDAO.save(p);    
+        //guarda el ticket con los datos
         tDAO.save(t);
     }
 }

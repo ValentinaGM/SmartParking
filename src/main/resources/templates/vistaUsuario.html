@@ -59,14 +59,45 @@
         </div>
     </div>
     
+    <!-- Eliminar Modal -->
+    <div class="modal fade" id="eliminarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar vehiculo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="patenteEliminar">Patente</label>
+                        <select class="form-control" id="patenteEliminar">
+                            <option th:each="v : ${vehiculosBD}"><span th:text="${v.patente}"></span></option>                            
+                        </select>  
+                    </div>                    
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-primary" onclick="eliminarVehiculo()">Eliminar</button>
+                    </div>
+                    <input type="hidden" id="usuarioid" name="usuarioid" class="form-control" th:value="${usuario.id}">                  
+
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="container">
         <p style="color:antiquewhite">Bienvenido <span th:text="${usuario.nombre}"></span></p>
     </div>
 
     <div class="container" >
-        <button class="btn btn-primary" onclick="actualizar()">Actualizar </button>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#registrarModal"> Registrar Vehiculo </button>
+        <div class="mb-3">
+            <button class="btn btn-success" onclick="actualizar()">Actualizar </button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#registrarModal"> Registrar Vehiculo </button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal"> Eliminar Vehiculo </button>
+        </div>
         <div>
 
             <div class="row">
@@ -191,6 +222,18 @@
                 alertify.set('notifier','position','top-center');
                 alertify.error('Debe completar todos los datos');
             }
+        }
+        
+        function eliminarVehiculo() {
+            var patente = document.getElementById("patenteEliminar").value;           
+            var usuarioid = document.getElementById("usuarioid").value;    
+
+            axios.post("eliminarVehiculo/" + usuarioid + "/" + patente);
+            alertify.set('notifier','position','top-center');
+            alertify.success('Vehiculo eliminado');
+            $('#eliminarModal').modal('hide');
+            document.getElementById("patenteEliminar").value = "";                     
+            
         }
 
     </script>

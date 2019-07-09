@@ -37,16 +37,17 @@ public class LoginController {
         if (sesion != null) {
             // Obtener objeto de usuario
             Object usuario = sesion.getAttribute("usuarioLogueado");
-            // Si el objeto es de tipo UsuarioBase
+            // Si el objeto es de tipo usuario ir a vistaUsuario
             if (usuario instanceof Usuario) {
                 return "redirect:/vistaUsuario";
+            // Si el objeto es de tipo guardia ir a vistaGuardia
             } else if (usuario instanceof Guardia) {
                 return "redirect:/vistaGuardia";
             }
         }
-        // List<Usuario> usuarios = uDAO.findAll();
+        // Si no hay sesion mostrar login y crear objeto usuario
         model.addAttribute("usuario", new Usuario());
-
+        
         return "login";
     }
 
@@ -80,19 +81,20 @@ public class LoginController {
             //se cambia el valor del atributo invalido a true, para mostrar el mensaje de error en la vista
             model.addAttribute("invalido", true);
             model.addAttribute("usuario", new Usuario());
-            //se devuelve al login
+            //se devuelve al login, sin usar redirect para que se pueda mostrar el mensaje de error
             return "login";
 
         }
         //se devuelve nulo para que no tire error el metodo, pero esto nunca pasará
         return null;
     }
-
+    //este metodo se usa al cerrar sesion
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
-
+        //se desconecta la sesion
         request.getSession().invalidate();
-
+        //se devuelve al index
         return "redirect:/index";
     }
+
 }
