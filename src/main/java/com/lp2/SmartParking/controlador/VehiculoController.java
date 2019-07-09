@@ -22,34 +22,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class VehiculoController {
+
     @Autowired
     private VehiculoDAO vDAO;
     @Autowired
     private UsuarioDAO uDAO;
-    
-     //este metodo se utiliza al registrar un vehiculo 
-    @PostMapping("registrarVehiculo/{id}") 
+
+    @PostMapping("registrarVehiculo/{id}")
     @ResponseBody
-    //se le entrega los datos del vehiculo y el id del usuario logueado, esto a traves del axios en el javascript
-    public void vehiculoForm(@RequestBody Vehiculo vehiculo, @PathVariable(name="id") int idUsuario) {
-        //se busca el usuario
-        Usuario usu = uDAO.findById(idUsuario); 
-        //se le asigna el usuario al vehiculo
-        vehiculo.setUsuarioid(usu);
-        //se guarda el vehiculo
-        vDAO.save(vehiculo);        
-    }
-    //este metodo se utiliza al eliminar un vehiculo 
-    @PostMapping("eliminarVehiculo/{id}/{patente}") 
-    @ResponseBody
-    //se le entrega la patente del vehiculo y el id del usuario logueado
-    public void eliminarVehiculo(@PathVariable(name="id") int idUsuario, @PathVariable(name="patente") String patente) {
-        //se busca el usuario
+    public void vehiculoForm(@RequestBody Vehiculo vehiculo, @PathVariable(name = "id") int idUsuario) {
         Usuario usu = uDAO.findById(idUsuario);
-        //se busca el vehiculo por usuario y por patente
+        vehiculo.setUsuarioid(usu);
+        vDAO.save(vehiculo);
+    }
+
+    @PostMapping("eliminarVehiculo/{id}/{patente}")
+    @ResponseBody
+    public void eliminarVehiculo(@PathVariable(name = "id") int idUsuario, @PathVariable(name = "patente") String patente) {
+        Usuario usu = uDAO.findById(idUsuario);
         Vehiculo v = vDAO.findByPatenteAndUsuarioid(patente, usu);
-        //se eliminar el vehiculo
         vDAO.delete(v);
     }
-    
+
 }
