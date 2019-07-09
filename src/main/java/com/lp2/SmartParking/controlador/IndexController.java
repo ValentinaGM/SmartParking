@@ -23,4 +23,10 @@ public class IndexController {
         return "index";
     }
     
+    @GetMapping("/nosotros")
+    public String nosotros(Model model) {
+        
+        return "nosotros";
+    }
+    
 }
