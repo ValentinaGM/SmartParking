@@ -89,7 +89,7 @@ public class GuardiaController {
         p.setVehiculoid(v);
         //guarda el puesto con el estado cambiado
         pDAO.save(p);    
-        tDAO.save(t);
+        tDAO.save(t); 
     }
     
     @PostMapping("desasignarpuesto/{id}")

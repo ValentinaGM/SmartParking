@@ -11,7 +11,7 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author Valentina
+ * @author Valentina 
  */
 public interface VehiculoDAO extends CrudRepository<Vehiculo, Integer> {
     public Vehiculo findByPatente(String p);

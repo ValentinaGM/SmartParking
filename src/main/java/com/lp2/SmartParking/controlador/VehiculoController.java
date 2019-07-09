@@ -44,6 +44,6 @@ public class VehiculoController {
 
         //el RequestBody obtiene los datos que vienen del axios en el javascript de la vistausuario, y se guardan en la bd con el save
         vDAO.save(vehiculo);        
-    }
+    } 
     
 }
