@@ -1,73 +1,52 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Nosotros</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartParking</title>
-    <link href="../assets/bootstrap/css/bootstrap.min.css" th:href="@{assets/bootstrap/css/bootstrap.min.css}"
-        rel="stylesheet">
-    <link href="../assets/fonts/ionicons.min.css" th:href="@{/assets/fonts/ionicons.min.css}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
-    <link href="../assets/css/Header-Blue.css" th:href="@{/assets/css/Header-Blue.css}" rel="stylesheet">
-    <link href="../assets/css/Login-Form-Dark.css" th:href="@{/assets/css/Login-Form-Dark.css}" rel="stylesheet">
-    <link href="../assets/css/Registration-Form-with-Photo.css"
-        th:href="@{/assets/css/Registration-Form-with-Photo.css}" rel="stylesheet">
-    <link href="../assets/css/styles.css" th:href="@{/assets/css/styles.css}" rel="stylesheet">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body>
-    <div>
-        <div class="header-blue">
-            <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <a class="navbar-brand" href="#">
-                    <img src="sp.png" width="130" height="30" alt="">
-                </a>
-                <div class="container"><a class="navbar-brand" href="#">Smart Parking</a><button class="navbar-toggler"
-                        data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle
-                            navigation</span><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navcol-1">
-                        <ul class="nav navbar-nav">
-                        
-                            <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle"
-                                    data-toggle="dropdown" aria-expanded="false" href="#">Ver Más </a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
-                                        href="#">Nosotros</a></div>
-                            </li>
-                        </ul>
-                        <form class="form-inline mr-auto" target="_self">
-                            <div class="form-group"><label for="search-field"></label><input
-                                    class="form-control search-field" type="search" name="search" id="search-field">
-                            </div>
-                        </form><span class="navbar-text"> <a href="login" class="login">Entrar</a></span><a
-                            class="btn action-button" role="button" href="registrar">Regístrate!</a> <a
-                            class="btn btn-light action-button" role="button" href="#"> Cerrar Sesión </a>
-                    </div>
-                </div>
-            </nav>
-            <div class="container hero">
-                <div class="row">
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <h1>Smart Parking ya está aquí!</h1>
-                        <p>Regístrate y obtén acceso a información de los estacionamientos de la institución UFRO.</p>
-                        
-                    </div>
-                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
-                        <div class="iphone-mockup"><img src="../assets/img/iphone.svg" class="device">
-                            <div class="screen" style="background-image: url(../assets/img/parkingLot.jpg);"></div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body background="fondo.jpeg">
+
+    <div class="container">
+        <h1 style="text-align: center; color: antiquewhite; padding-top: 20px" > DESARROLLADORES </h1>
+
+         <div class="row">
+                <div class="card; col-4" style="width: 18rem;">
+                        <img src="vale.jpeg" class="card-img-top" style="height: 347px;">
+                        <div class="card-body" style="color:antiquewhite">
+                          <h5 class="card-title">Valentina Garcia</h5>
+                          <p class="card-text"> Pro BackEnd Maker - Netbeaner Pro </p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script th:src="@{/assets/js/jquery.min.js}"></script>
-    <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
-</body>
+                      </div>
 
+                      <div class="card; col-4" style="width: 18rem;">
+                            <img src="manuel.jpeg" class="card-img-top" >
+                            <div class="card-body" style="color:antiquewhite">
+                              <h5 class="card-title"> Manuel Palma</h5>
+                              <p class="card-text"> Pro FrontEnd Maker - Ppt Pro Maker </p>
+                            </div>
+                          </div>
+
+                          <div class="card; col-4" style="width: 18rem;">
+                                <img src="yo.jpeg" class="card-img-top" style="height: 347px;">
+                                <div class="card-body" style="color:antiquewhite">
+                                  <h5 class="card-title">Gustavo Pardo</h5>
+                                  <p class="card-text"> Noob FrontEnd Maker - FunnyCommit Maker </p>
+                                </div>
+                              </div>
+
+         </div>
+
+    </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
